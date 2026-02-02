@@ -3,4 +3,7 @@ export enum ENVEnum {
   DATABASE_URL = 'DATABASE_URL',
 
   PORT = 'PORT',
+  BASE_URL = 'BASE_URL',
+
+
 }
