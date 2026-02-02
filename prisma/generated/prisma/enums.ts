@@ -9,7 +9,26 @@
 * 🟢 You can import this file directly.
 */
 
+export const Language = {
+  English: 'English'
+} as const
+
+export type Language = (typeof Language)[keyof typeof Language]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const UserStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  DELETED: 'DELETED'
+} as const
+
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const AuthMethod = {
+  PASSWORD: 'PASSWORD',
+  FACE_ID: 'FACE_ID'
+} as const
+
+export type AuthMethod = (typeof AuthMethod)[keyof typeof AuthMethod]

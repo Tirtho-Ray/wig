@@ -5,5 +5,8 @@ export enum ENVEnum {
   PORT = 'PORT',
   BASE_URL = 'BASE_URL',
 
+  //BCRYPT
+  BCRYPT_SALT_ROUNDS='BCRYPT_SALT_ROUNDS'
+
 
 }

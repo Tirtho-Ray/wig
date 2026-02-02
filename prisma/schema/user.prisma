@@ -1,10 +1,43 @@
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String?
-  password  String
-  createdAt DateTime  @default(now())
+  id              String         @id @default(uuid())
+  email           String         @unique
+  name            String      
+  password        String  
+  mobile          String?
+  language        Language       @default(English)
+  status          UserStatus     @default(PENDING)
   
+  // Security & Auth
+  mfaEnabled      Boolean        @default(false)
+  preferredMethod AuthMethod     @default(PASSWORD)
+  
+  faceBiometrics  FaceBiometric? 
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
 
-  products  Product[]
+model FaceBiometric {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  faceDescriptor Float[]  
+  createdAt      DateTime @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+enum Language {
+  English
+}
+
+enum UserStatus {
+  PENDING   
+  ACTIVE   
+  SUSPENDED 
+  DELETED
+}
+
+enum AuthMethod {
+  PASSWORD
+  FACE_ID
 }

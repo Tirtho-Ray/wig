@@ -20,34 +20,36 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
 
-export type UserAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type UserSumAggregateOutputType = {
-  id: number | null
-}
-
 export type UserMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   email: string | null
   name: string | null
   password: string | null
+  mobile: string | null
+  language: $Enums.Language | null
+  status: $Enums.UserStatus | null
+  mfaEnabled: boolean | null
+  preferredMethod: $Enums.AuthMethod | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   email: string | null
   name: string | null
   password: string | null
+  mobile: string | null
+  language: $Enums.Language | null
+  status: $Enums.UserStatus | null
+  mfaEnabled: boolean | null
+  preferredMethod: $Enums.AuthMethod | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -55,25 +57,29 @@ export type UserCountAggregateOutputType = {
   email: number
   name: number
   password: number
+  mobile: number
+  language: number
+  status: number
+  mfaEnabled: number
+  preferredMethod: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
-
-export type UserAvgAggregateInputType = {
-  id?: true
-}
-
-export type UserSumAggregateInputType = {
-  id?: true
-}
 
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
   name?: true
   password?: true
+  mobile?: true
+  language?: true
+  status?: true
+  mfaEnabled?: true
+  preferredMethod?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -81,7 +87,13 @@ export type UserMaxAggregateInputType = {
   email?: true
   name?: true
   password?: true
+  mobile?: true
+  language?: true
+  status?: true
+  mfaEnabled?: true
+  preferredMethod?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -89,7 +101,13 @@ export type UserCountAggregateInputType = {
   email?: true
   name?: true
   password?: true
+  mobile?: true
+  language?: true
+  status?: true
+  mfaEnabled?: true
+  preferredMethod?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -131,18 +149,6 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: UserAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: UserSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -173,21 +179,23 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
-  _avg?: UserAvgAggregateInputType
-  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
 
 export type UserGroupByOutputType = {
-  id: number
+  id: string
   email: string
-  name: string | null
+  name: string
   password: string
+  mobile: string | null
+  language: $Enums.Language
+  status: $Enums.UserStatus
+  mfaEnabled: boolean
+  preferredMethod: $Enums.AuthMethod
   createdAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -211,119 +219,187 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  id?: Prisma.IntFilter<"User"> | number
+  id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  mobile?: Prisma.StringNullableFilter<"User"> | string | null
+  language?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  products?: Prisma.ProductListRelationFilter
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  faceBiometrics?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  mobile?: Prisma.SortOrderInput | Prisma.SortOrder
+  language?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
+  preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  products?: Prisma.ProductOrderByRelationAggregateInput
+  updatedAt?: Prisma.SortOrder
+  faceBiometrics?: Prisma.FaceBiometricOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  mobile?: Prisma.StringNullableFilter<"User"> | string | null
+  language?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  products?: Prisma.ProductListRelationFilter
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  faceBiometrics?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  mobile?: Prisma.SortOrderInput | Prisma.SortOrder
+  language?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
+  preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
-  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
-  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"User"> | number
+  id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  name?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  mobile?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  language?: Prisma.EnumLanguageWithAggregatesFilter<"User"> | $Enums.Language
+  status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  preferredMethod?: Prisma.EnumAuthMethodWithAggregatesFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
+  id?: string
   email: string
-  name?: string | null
+  name: string
   password: string
+  mobile?: string | null
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
-  products?: Prisma.ProductCreateNestedManyWithoutOwnerInput
+  updatedAt?: Date | string
+  faceBiometrics?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
-  id?: number
+  id?: string
   email: string
-  name?: string | null
+  name: string
   password: string
+  mobile?: string | null
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOwnerInput
+  updatedAt?: Date | string
+  faceBiometrics?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  products?: Prisma.ProductUpdateManyWithoutOwnerNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  faceBiometrics?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOwnerNestedInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  faceBiometrics?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
-  id?: number
+  id?: string
   email: string
-  name?: string | null
+  name: string
   password: string
+  mobile?: string | null
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -331,11 +407,13 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  mobile?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
+  preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type UserAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -343,7 +421,13 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  mobile?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
+  preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -351,102 +435,134 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  mobile?: Prisma.SortOrder
+  language?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  mfaEnabled?: Prisma.SortOrder
+  preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
-export type UserSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
-export type UserCreateNestedOneWithoutProductsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutProductsInput, Prisma.UserUncheckedCreateWithoutProductsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProductsInput
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type EnumLanguageFieldUpdateOperationsInput = {
+  set?: $Enums.Language
+}
+
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type EnumAuthMethodFieldUpdateOperationsInput = {
+  set?: $Enums.AuthMethod
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutFaceBiometricsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutProductsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutProductsInput, Prisma.UserUncheckedCreateWithoutProductsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProductsInput
-  upsert?: Prisma.UserUpsertWithoutProductsInput
+export type UserUpdateOneRequiredWithoutFaceBiometricsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricsInput
+  upsert?: Prisma.UserUpsertWithoutFaceBiometricsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProductsInput, Prisma.UserUpdateWithoutProductsInput>, Prisma.UserUncheckedUpdateWithoutProductsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaceBiometricsInput, Prisma.UserUpdateWithoutFaceBiometricsInput>, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
 }
 
-export type UserCreateWithoutProductsInput = {
+export type UserCreateWithoutFaceBiometricsInput = {
+  id?: string
   email: string
-  name?: string | null
+  name: string
   password: string
+  mobile?: string | null
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type UserUncheckedCreateWithoutProductsInput = {
-  id?: number
+export type UserUncheckedCreateWithoutFaceBiometricsInput = {
+  id?: string
   email: string
-  name?: string | null
+  name: string
   password: string
+  mobile?: string | null
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
-export type UserCreateOrConnectWithoutProductsInput = {
+export type UserCreateOrConnectWithoutFaceBiometricsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutProductsInput, Prisma.UserUncheckedCreateWithoutProductsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
 }
 
-export type UserUpsertWithoutProductsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutProductsInput, Prisma.UserUncheckedUpdateWithoutProductsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutProductsInput, Prisma.UserUncheckedCreateWithoutProductsInput>
+export type UserUpsertWithoutFaceBiometricsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricsInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutProductsInput = {
+export type UserUpdateToOneWithWhereWithoutFaceBiometricsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutProductsInput, Prisma.UserUncheckedUpdateWithoutProductsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricsInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
 }
 
-export type UserUpdateWithoutProductsInput = {
+export type UserUpdateWithoutFaceBiometricsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserUncheckedUpdateWithoutProductsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+export type UserUncheckedUpdateWithoutFaceBiometricsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type UserCountOutputType
- */
-
-export type UserCountOutputType = {
-  products: number
-}
-
-export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  products?: boolean | UserCountOutputTypeCountProductsArgs
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserCountOutputType
-   */
-  select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductWhereInput
-}
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -454,9 +570,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   name?: boolean
   password?: boolean
+  mobile?: boolean
+  language?: boolean
+  status?: boolean
+  mfaEnabled?: boolean
+  preferredMethod?: boolean
   createdAt?: boolean
-  products?: boolean | Prisma.User$productsArgs<ExtArgs>
-  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
+  updatedAt?: boolean
+  faceBiometrics?: boolean | Prisma.User$faceBiometricsArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -464,7 +585,13 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   name?: boolean
   password?: boolean
+  mobile?: boolean
+  language?: boolean
+  status?: boolean
+  mfaEnabled?: boolean
+  preferredMethod?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -472,7 +599,13 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   name?: boolean
   password?: boolean
+  mobile?: boolean
+  language?: boolean
+  status?: boolean
+  mfaEnabled?: boolean
+  preferredMethod?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -480,13 +613,18 @@ export type UserSelectScalar = {
   email?: boolean
   name?: boolean
   password?: boolean
+  mobile?: boolean
+  language?: boolean
+  status?: boolean
+  mfaEnabled?: boolean
+  preferredMethod?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mobile" | "language" | "status" | "mfaEnabled" | "preferredMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  products?: boolean | Prisma.User$productsArgs<ExtArgs>
-  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
+  faceBiometrics?: boolean | Prisma.User$faceBiometricsArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -494,14 +632,20 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    products: Prisma.$ProductPayload<ExtArgs>[]
+    faceBiometrics: Prisma.$FaceBiometricPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     email: string
-    name: string | null
+    name: string
     password: string
+    mobile: string | null
+    language: $Enums.Language
+    status: $Enums.UserStatus
+    mfaEnabled: boolean
+    preferredMethod: $Enums.AuthMethod
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -896,7 +1040,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  products<T extends Prisma.User$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  faceBiometrics<T extends Prisma.User$faceBiometricsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$faceBiometricsArgs<ExtArgs>>): Prisma.Prisma__FaceBiometricClient<runtime.Types.Result.GetResult<Prisma.$FaceBiometricPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -926,11 +1070,17 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the User model
  */
 export interface UserFieldRefs {
-  readonly id: Prisma.FieldRef<"User", 'Int'>
+  readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly mobile: Prisma.FieldRef<"User", 'String'>
+  readonly language: Prisma.FieldRef<"User", 'Language'>
+  readonly status: Prisma.FieldRef<"User", 'UserStatus'>
+  readonly mfaEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly preferredMethod: Prisma.FieldRef<"User", 'AuthMethod'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1319,27 +1469,22 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.products
+ * User.faceBiometrics
  */
-export type User$productsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$faceBiometricsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Product
+   * Select specific fields to fetch from the FaceBiometric
    */
-  select?: Prisma.ProductSelect<ExtArgs> | null
+  select?: Prisma.FaceBiometricSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Product
+   * Omit specific fields from the FaceBiometric
    */
-  omit?: Prisma.ProductOmit<ExtArgs> | null
+  omit?: Prisma.FaceBiometricOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProductInclude<ExtArgs> | null
-  where?: Prisma.ProductWhereInput
-  orderBy?: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[]
-  cursor?: Prisma.ProductWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
+  include?: Prisma.FaceBiometricInclude<ExtArgs> | null
+  where?: Prisma.FaceBiometricWhereInput
 }
 
 /**

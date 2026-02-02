@@ -51,8 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Product: 'Product',
-  User: 'User'
+  User: 'User',
+  FaceBiometric: 'FaceBiometric'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,27 +71,32 @@ export const TransactionIsolationLevel = {
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ProductScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  price: 'price',
-  createdAt: 'createdAt',
-  ownerId: 'ownerId'
-} as const
-
-export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
-
-
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   name: 'name',
   password: 'password',
-  createdAt: 'createdAt'
+  mobile: 'mobile',
+  language: 'language',
+  status: 'status',
+  mfaEnabled: 'mfaEnabled',
+  preferredMethod: 'preferredMethod',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const FaceBiometricScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  faceDescriptor: 'faceDescriptor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FaceBiometricScalarFieldEnum = (typeof FaceBiometricScalarFieldEnum)[keyof typeof FaceBiometricScalarFieldEnum]
 
 
 export const SortOrder = {
