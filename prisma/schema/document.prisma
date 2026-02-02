@@ -1,0 +1,11 @@
+model Document {
+    id            String   @id @default(uuid())
+    label         String
+    value         String
+    category      String?
+    documentPhoto String[]
+    userId        String
+    user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}

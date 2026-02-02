@@ -1,0 +1,10 @@
+model EmContact {
+    id           String   @id @default(uuid())
+    name         String
+    relationship String
+    phoneNumber  String
+    userId       String
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}

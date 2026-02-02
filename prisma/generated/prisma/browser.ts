@@ -18,6 +18,16 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
+ * Model EmContact
+ * 
+ */
+export type EmContact = Prisma.EmContactModel
+/**
  * Model User
  * 
  */
@@ -27,3 +37,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type FaceBiometric = Prisma.FaceBiometricModel
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
