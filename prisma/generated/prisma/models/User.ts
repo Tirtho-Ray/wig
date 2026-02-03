@@ -37,6 +37,7 @@ export type UserMinAggregateOutputType = {
   preferredMethod: $Enums.AuthMethod | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type UserMaxAggregateOutputType = {
   preferredMethod: $Enums.AuthMethod | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -67,6 +69,7 @@ export type UserCountAggregateOutputType = {
   preferredMethod: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -84,6 +87,7 @@ export type UserMinAggregateInputType = {
   preferredMethod?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -99,6 +103,7 @@ export type UserMaxAggregateInputType = {
   preferredMethod?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -114,6 +119,7 @@ export type UserCountAggregateInputType = {
   preferredMethod?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -202,6 +208,7 @@ export type UserGroupByOutputType = {
   preferredMethod: $Enums.AuthMethod
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -238,10 +245,11 @@ export type UserWhereInput = {
   preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  faceBiometrics?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  faceBiometric?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
-  Document?: Prisma.DocumentListRelationFilter
+  document?: Prisma.DocumentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -257,10 +265,11 @@ export type UserOrderByWithRelationInput = {
   preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  faceBiometrics?: Prisma.FaceBiometricOrderByWithRelationInput
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  faceBiometric?: Prisma.FaceBiometricOrderByWithRelationInput
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   emergencyContact?: Prisma.EmContactOrderByRelationAggregateInput
-  Document?: Prisma.DocumentOrderByRelationAggregateInput
+  document?: Prisma.DocumentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -279,10 +288,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  faceBiometrics?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  faceBiometric?: Prisma.XOR<Prisma.FaceBiometricNullableScalarRelationFilter, Prisma.FaceBiometricWhereInput> | null
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
-  Document?: Prisma.DocumentListRelationFilter
+  document?: Prisma.DocumentListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -298,6 +308,7 @@ export type UserOrderByWithAggregationInput = {
   preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -319,6 +330,7 @@ export type UserScalarWhereWithAggregatesInput = {
   preferredMethod?: Prisma.EnumAuthMethodWithAggregatesFilter<"User"> | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -334,10 +346,11 @@ export type UserCreateInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -353,10 +366,11 @@ export type UserUncheckedCreateInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -372,10 +386,11 @@ export type UserUpdateInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -391,10 +406,11 @@ export type UserUncheckedUpdateInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -410,6 +426,7 @@ export type UserCreateManyInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -425,6 +442,7 @@ export type UserUpdateManyMutationInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -440,6 +458,7 @@ export type UserUncheckedUpdateManyInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserScalarRelationFilter = {
@@ -460,6 +479,7 @@ export type UserCountOrderByAggregateInput = {
   preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -475,6 +495,7 @@ export type UserMaxOrderByAggregateInput = {
   preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -490,6 +511,7 @@ export type UserMinOrderByAggregateInput = {
   preferredMethod?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutDocumentInput = {
@@ -536,18 +558,22 @@ export type EnumAuthMethodFieldUpdateOperationsInput = {
   set?: $Enums.AuthMethod
 }
 
-export type UserCreateNestedOneWithoutFaceBiometricsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricsInput
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type UserCreateNestedOneWithoutFaceBiometricInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricInput, Prisma.UserUncheckedCreateWithoutFaceBiometricInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutFaceBiometricsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricsInput
-  upsert?: Prisma.UserUpsertWithoutFaceBiometricsInput
+export type UserUpdateOneRequiredWithoutFaceBiometricNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricInput, Prisma.UserUncheckedCreateWithoutFaceBiometricInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricInput
+  upsert?: Prisma.UserUpsertWithoutFaceBiometricInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaceBiometricsInput, Prisma.UserUpdateWithoutFaceBiometricsInput>, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaceBiometricInput, Prisma.UserUpdateWithoutFaceBiometricInput>, Prisma.UserUncheckedUpdateWithoutFaceBiometricInput>
 }
 
 export type UserCreateNestedOneWithoutRefreshTokensInput = {
@@ -577,7 +603,8 @@ export type UserCreateWithoutDocumentInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
 }
@@ -595,7 +622,8 @@ export type UserUncheckedCreateWithoutDocumentInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
 }
@@ -629,7 +657,8 @@ export type UserUpdateWithoutDocumentInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
 }
@@ -647,7 +676,8 @@ export type UserUncheckedUpdateWithoutDocumentInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -665,9 +695,10 @@ export type UserCreateWithoutEmergencyContactInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmergencyContactInput = {
@@ -683,9 +714,10 @@ export type UserUncheckedCreateWithoutEmergencyContactInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmergencyContactInput = {
@@ -717,9 +749,10 @@ export type UserUpdateWithoutEmergencyContactInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmergencyContactInput = {
@@ -735,12 +768,13 @@ export type UserUncheckedUpdateWithoutEmergencyContactInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutFaceBiometricsInput = {
+export type UserCreateWithoutFaceBiometricInput = {
   id?: string
   email: string
   name: string
@@ -753,12 +787,13 @@ export type UserCreateWithoutFaceBiometricsInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutFaceBiometricsInput = {
+export type UserUncheckedCreateWithoutFaceBiometricInput = {
   id?: string
   email: string
   name: string
@@ -771,28 +806,29 @@ export type UserUncheckedCreateWithoutFaceBiometricsInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutFaceBiometricsInput = {
+export type UserCreateOrConnectWithoutFaceBiometricInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricInput, Prisma.UserUncheckedCreateWithoutFaceBiometricInput>
 }
 
-export type UserUpsertWithoutFaceBiometricsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricsInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricsInput, Prisma.UserUncheckedCreateWithoutFaceBiometricsInput>
+export type UserUpsertWithoutFaceBiometricInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricInput, Prisma.UserUncheckedCreateWithoutFaceBiometricInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutFaceBiometricsInput = {
+export type UserUpdateToOneWithWhereWithoutFaceBiometricInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricsInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFaceBiometricInput, Prisma.UserUncheckedUpdateWithoutFaceBiometricInput>
 }
 
-export type UserUpdateWithoutFaceBiometricsInput = {
+export type UserUpdateWithoutFaceBiometricInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -805,12 +841,13 @@ export type UserUpdateWithoutFaceBiometricsInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutFaceBiometricsInput = {
+export type UserUncheckedUpdateWithoutFaceBiometricInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -823,9 +860,10 @@ export type UserUncheckedUpdateWithoutFaceBiometricsInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -841,9 +879,10 @@ export type UserCreateWithoutRefreshTokensInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -859,9 +898,10 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   preferredMethod?: $Enums.AuthMethod
   createdAt?: Date | string
   updatedAt?: Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
-  Document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -893,9 +933,10 @@ export type UserUpdateWithoutRefreshTokensInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -911,9 +952,10 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  faceBiometrics?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
-  Document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -924,13 +966,13 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
 export type UserCountOutputType = {
   refreshTokens: number
   emergencyContact: number
-  Document: number
+  document: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   emergencyContact?: boolean | UserCountOutputTypeCountEmergencyContactArgs
-  Document?: boolean | UserCountOutputTypeCountDocumentArgs
+  document?: boolean | UserCountOutputTypeCountDocumentArgs
 }
 
 /**
@@ -978,10 +1020,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   preferredMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  faceBiometrics?: boolean | Prisma.User$faceBiometricsArgs<ExtArgs>
+  deletedAt?: boolean
+  faceBiometric?: boolean | Prisma.User$faceBiometricArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
-  Document?: boolean | Prisma.User$DocumentArgs<ExtArgs>
+  document?: boolean | Prisma.User$documentArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -998,6 +1041,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   preferredMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1013,6 +1057,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   preferredMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1028,14 +1073,15 @@ export type UserSelectScalar = {
   preferredMethod?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mobile" | "profile" | "language" | "status" | "mfaEnabled" | "preferredMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mobile" | "profile" | "language" | "status" | "mfaEnabled" | "preferredMethod" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  faceBiometrics?: boolean | Prisma.User$faceBiometricsArgs<ExtArgs>
+  faceBiometric?: boolean | Prisma.User$faceBiometricArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
-  Document?: boolean | Prisma.User$DocumentArgs<ExtArgs>
+  document?: boolean | Prisma.User$documentArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1044,10 +1090,10 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    faceBiometrics: Prisma.$FaceBiometricPayload<ExtArgs> | null
+    faceBiometric: Prisma.$FaceBiometricPayload<ExtArgs> | null
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     emergencyContact: Prisma.$EmContactPayload<ExtArgs>[]
-    Document: Prisma.$DocumentPayload<ExtArgs>[]
+    document: Prisma.$DocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1062,6 +1108,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     preferredMethod: $Enums.AuthMethod
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1456,10 +1503,10 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  faceBiometrics<T extends Prisma.User$faceBiometricsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$faceBiometricsArgs<ExtArgs>>): Prisma.Prisma__FaceBiometricClient<runtime.Types.Result.GetResult<Prisma.$FaceBiometricPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  faceBiometric<T extends Prisma.User$faceBiometricArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$faceBiometricArgs<ExtArgs>>): Prisma.Prisma__FaceBiometricClient<runtime.Types.Result.GetResult<Prisma.$FaceBiometricPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emergencyContact<T extends Prisma.User$emergencyContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emergencyContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  Document<T extends Prisma.User$DocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$DocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  document<T extends Prisma.User$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1501,6 +1548,7 @@ export interface UserFieldRefs {
   readonly preferredMethod: Prisma.FieldRef<"User", 'AuthMethod'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1889,9 +1937,9 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.faceBiometrics
+ * User.faceBiometric
  */
-export type User$faceBiometricsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$faceBiometricArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the FaceBiometric
    */
@@ -1956,9 +2004,9 @@ export type User$emergencyContactArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * User.Document
+ * User.document
  */
-export type User$DocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$documentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Document
    */

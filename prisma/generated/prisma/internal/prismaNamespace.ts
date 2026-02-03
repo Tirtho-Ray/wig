@@ -856,7 +856,8 @@ export const UserScalarFieldEnum = {
   mfaEnabled: 'mfaEnabled',
   preferredMethod: 'preferredMethod',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -867,6 +868,7 @@ export const FaceBiometricScalarFieldEnum = {
   userId: 'userId',
   faceDescriptor: 'faceDescriptor',
   version: 'version',
+  lastUsedAt: 'lastUsedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -876,10 +878,14 @@ export type FaceBiometricScalarFieldEnum = (typeof FaceBiometricScalarFieldEnum)
 
 export const RefreshTokenScalarFieldEnum = {
   id: 'id',
-  token: 'token',
+  tokenHash: 'tokenHash',
   userId: 'userId',
+  deviceId: 'deviceId',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
   isRevoked: 'isRevoked',
   expiresAt: 'expiresAt',
+  lastUsedAt: 'lastUsedAt',
   createdAt: 'createdAt'
 } as const
 

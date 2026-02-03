@@ -1,51 +1,141 @@
+// model User {
+//   id       String     @id @default(uuid())
+//   email    String     @unique
+//   name     String
+//   password String
+//   mobile   String?
+//   profile  String?
+//   language Language   @default(English)
+//   status   UserStatus @default(PENDING)
+
+//   // Security & Auth
+//   mfaEnabled      Boolean    @default(false)
+//   preferredMethod AuthMethod @default(PASSWORD)
+
+//   faceBiometrics FaceBiometric?
+//   refreshTokens  RefreshToken[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   //relation
+//   emergencyContact  EmContact[]
+//   Document          Document[]
+
+//   @@index([email, status])
+// }
+
+// model FaceBiometric {
+//   id             String   @id @default(uuid())
+//   userId         String   @unique
+//   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   faceDescriptor Float[]
+//   version        Int      @default(1)
+//   createdAt      DateTime @default(now())
+//   updatedAt      DateTime @updatedAt
+// }
+
+// model RefreshToken {
+//   id        String   @id @default(uuid())
+//   token     String   @unique
+//   userId    String
+//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   isRevoked Boolean  @default(false)
+//   expiresAt DateTime
+//   createdAt DateTime @default(now())
+
+//   @@index([userId])
+// }
+
+// enum Language {
+//   English
+// }
+
+// enum UserStatus {
+//   PENDING
+//   ACTIVE
+//   SUSPENDED
+//   DELETED
+// }
+
+// enum AuthMethod {
+//   PASSWORD
+//   FACE_ID
+// }
+
+
 model User {
   id       String     @id @default(uuid())
   email    String     @unique
   name     String
   password String
+
   mobile   String?
   profile  String?
+
   language Language   @default(English)
   status   UserStatus @default(PENDING)
 
-  // Security & Auth
+
   mfaEnabled      Boolean    @default(false)
   preferredMethod AuthMethod @default(PASSWORD)
 
-  faceBiometrics FaceBiometric?
+  faceBiometric  FaceBiometric?
   refreshTokens  RefreshToken[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  emergencyContact EmContact[]
+  document         Document[]
 
-  //relation
-  emergencyContact  EmContact[]
-  Document          Document[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   @@index([email, status])
 }
+
 
 model FaceBiometric {
   id             String   @id @default(uuid())
   userId         String   @unique
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+
   faceDescriptor Float[]
-  version        Int      @default(1)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+
+
+  version     Int      @default(1)
+  lastUsedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
 
 model RefreshToken {
   id        String   @id @default(uuid())
-  token     String   @unique
+
+
+  tokenHash String   @unique
+
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  deviceId   String
+  userAgent String
+  ipAddress String
+
+
   isRevoked Boolean  @default(false)
   expiresAt DateTime
+  lastUsedAt DateTime?
+
   createdAt DateTime @default(now())
 
   @@index([userId])
+  @@index([userId, deviceId])
 }
+
 
 enum Language {
   English
@@ -62,3 +152,4 @@ enum AuthMethod {
   PASSWORD
   FACE_ID
 }
+

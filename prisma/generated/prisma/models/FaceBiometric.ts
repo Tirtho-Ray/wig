@@ -40,6 +40,7 @@ export type FaceBiometricMinAggregateOutputType = {
   id: string | null
   userId: string | null
   version: number | null
+  lastUsedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -48,6 +49,7 @@ export type FaceBiometricMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   version: number | null
+  lastUsedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,6 +59,7 @@ export type FaceBiometricCountAggregateOutputType = {
   userId: number
   faceDescriptor: number
   version: number
+  lastUsedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,6 +80,7 @@ export type FaceBiometricMinAggregateInputType = {
   id?: true
   userId?: true
   version?: true
+  lastUsedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -85,6 +89,7 @@ export type FaceBiometricMaxAggregateInputType = {
   id?: true
   userId?: true
   version?: true
+  lastUsedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +99,7 @@ export type FaceBiometricCountAggregateInputType = {
   userId?: true
   faceDescriptor?: true
   version?: true
+  lastUsedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -190,6 +196,7 @@ export type FaceBiometricGroupByOutputType = {
   userId: string
   faceDescriptor: number[]
   version: number
+  lastUsedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: FaceBiometricCountAggregateOutputType | null
@@ -222,6 +229,7 @@ export type FaceBiometricWhereInput = {
   userId?: Prisma.StringFilter<"FaceBiometric"> | string
   faceDescriptor?: Prisma.FloatNullableListFilter<"FaceBiometric">
   version?: Prisma.IntFilter<"FaceBiometric"> | number
+  lastUsedAt?: Prisma.DateTimeNullableFilter<"FaceBiometric"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"FaceBiometric"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FaceBiometric"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -232,6 +240,7 @@ export type FaceBiometricOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   faceDescriptor?: Prisma.SortOrder
   version?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -245,6 +254,7 @@ export type FaceBiometricWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.FaceBiometricWhereInput | Prisma.FaceBiometricWhereInput[]
   faceDescriptor?: Prisma.FloatNullableListFilter<"FaceBiometric">
   version?: Prisma.IntFilter<"FaceBiometric"> | number
+  lastUsedAt?: Prisma.DateTimeNullableFilter<"FaceBiometric"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"FaceBiometric"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FaceBiometric"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -255,6 +265,7 @@ export type FaceBiometricOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   faceDescriptor?: Prisma.SortOrder
   version?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.FaceBiometricCountOrderByAggregateInput
@@ -272,6 +283,7 @@ export type FaceBiometricScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"FaceBiometric"> | string
   faceDescriptor?: Prisma.FloatNullableListFilter<"FaceBiometric">
   version?: Prisma.IntWithAggregatesFilter<"FaceBiometric"> | number
+  lastUsedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"FaceBiometric"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FaceBiometric"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"FaceBiometric"> | Date | string
 }
@@ -280,9 +292,10 @@ export type FaceBiometricCreateInput = {
   id?: string
   faceDescriptor?: Prisma.FaceBiometricCreatefaceDescriptorInput | number[]
   version?: number
+  lastUsedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutFaceBiometricsInput
+  user: Prisma.UserCreateNestedOneWithoutFaceBiometricInput
 }
 
 export type FaceBiometricUncheckedCreateInput = {
@@ -290,6 +303,7 @@ export type FaceBiometricUncheckedCreateInput = {
   userId: string
   faceDescriptor?: Prisma.FaceBiometricCreatefaceDescriptorInput | number[]
   version?: number
+  lastUsedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -298,9 +312,10 @@ export type FaceBiometricUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutFaceBiometricsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFaceBiometricNestedInput
 }
 
 export type FaceBiometricUncheckedUpdateInput = {
@@ -308,6 +323,7 @@ export type FaceBiometricUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -317,6 +333,7 @@ export type FaceBiometricCreateManyInput = {
   userId: string
   faceDescriptor?: Prisma.FaceBiometricCreatefaceDescriptorInput | number[]
   version?: number
+  lastUsedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -325,6 +342,7 @@ export type FaceBiometricUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -334,6 +352,7 @@ export type FaceBiometricUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -356,6 +375,7 @@ export type FaceBiometricCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   faceDescriptor?: Prisma.SortOrder
   version?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -369,6 +389,7 @@ export type FaceBiometricMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -377,6 +398,7 @@ export type FaceBiometricMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
+  lastUsedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -439,6 +461,7 @@ export type FaceBiometricCreateWithoutUserInput = {
   id?: string
   faceDescriptor?: Prisma.FaceBiometricCreatefaceDescriptorInput | number[]
   version?: number
+  lastUsedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -447,6 +470,7 @@ export type FaceBiometricUncheckedCreateWithoutUserInput = {
   id?: string
   faceDescriptor?: Prisma.FaceBiometricCreatefaceDescriptorInput | number[]
   version?: number
+  lastUsedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -471,6 +495,7 @@ export type FaceBiometricUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -479,6 +504,7 @@ export type FaceBiometricUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   faceDescriptor?: Prisma.FaceBiometricUpdatefaceDescriptorInput | number[]
   version?: Prisma.IntFieldUpdateOperationsInput | number
+  lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -490,6 +516,7 @@ export type FaceBiometricSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userId?: boolean
   faceDescriptor?: boolean
   version?: boolean
+  lastUsedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -500,6 +527,7 @@ export type FaceBiometricSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   faceDescriptor?: boolean
   version?: boolean
+  lastUsedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -510,6 +538,7 @@ export type FaceBiometricSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   faceDescriptor?: boolean
   version?: boolean
+  lastUsedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -520,11 +549,12 @@ export type FaceBiometricSelectScalar = {
   userId?: boolean
   faceDescriptor?: boolean
   version?: boolean
+  lastUsedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type FaceBiometricOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "faceDescriptor" | "version" | "createdAt" | "updatedAt", ExtArgs["result"]["faceBiometric"]>
+export type FaceBiometricOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "faceDescriptor" | "version" | "lastUsedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["faceBiometric"]>
 export type FaceBiometricInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -545,6 +575,7 @@ export type $FaceBiometricPayload<ExtArgs extends runtime.Types.Extensions.Inter
     userId: string
     faceDescriptor: number[]
     version: number
+    lastUsedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["faceBiometric"]>
@@ -975,6 +1006,7 @@ export interface FaceBiometricFieldRefs {
   readonly userId: Prisma.FieldRef<"FaceBiometric", 'String'>
   readonly faceDescriptor: Prisma.FieldRef<"FaceBiometric", 'Float[]'>
   readonly version: Prisma.FieldRef<"FaceBiometric", 'Int'>
+  readonly lastUsedAt: Prisma.FieldRef<"FaceBiometric", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"FaceBiometric", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"FaceBiometric", 'DateTime'>
 }
