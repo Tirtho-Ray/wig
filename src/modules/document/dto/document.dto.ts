@@ -23,7 +23,4 @@ export class CreateDocumentDto {
   @IsOptional()
   documentPhoto: string[];
 
-  @ApiProperty({ example: 'user_ulid_here' })
-  @IsString()
-  userId: string;
 }

@@ -1,57 +1,45 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateDocumentDto } from '../dto/document.dto';
 import { UpdateDocumentDto } from '../dto/updateDoc.dto';
-
 
 @Injectable()
 export class DocumentService {
     constructor(private readonly prisma: PrismaService) { }
 
-    async createDocument(dto: CreateDocumentDto) {
-        const userExists = await this.prisma.user.findUnique({
-            where: { id: dto.userId },
-        });
-
-        if (!userExists) {
-            throw new BadRequestException('User does not exist');
-        }
-
+    async createDocument(dto: CreateDocumentDto, userId: string) {
         return this.prisma.document.create({
             data: {
                 label: dto.label,
                 value: dto.value,
                 category: dto.category,
                 documentPhoto: dto.documentPhoto,
-                userId: dto.userId,
+                userId: userId, 
             },
         });
     }
 
-    async getAllDocuments() {
+    async getAllDocuments(userId: string) {
         return this.prisma.document.findMany({
-            include: {
-                user: true,
-            },
+            where: { userId },
+            orderBy: { createdAt: 'desc' }
         });
     }
 
-    async getDocumentById(id: string) {
-        const document = await this.prisma.document.findUnique({
-            where: { id },
-            include: { user: true },
+    async getDocumentById(id: string, userId: string) {
+        const document = await this.prisma.document.findFirst({
+            where: { id, userId }, 
         });
 
         if (!document) {
-            throw new NotFoundException('Document not found');
+            throw new NotFoundException('Document not found or you do not have access');
         }
 
         return document;
     }
 
-
-    async updateDocument(id: string, dto: UpdateDocumentDto) {
-        await this.getDocumentById(id);
+    async updateDocument(id: string, dto: UpdateDocumentDto, userId: string) {
+        await this.getDocumentById(id, userId);
 
         return this.prisma.document.update({
             where: { id },
@@ -59,9 +47,8 @@ export class DocumentService {
         });
     }
 
-
-    async deleteDocument(id: string) {
-        await this.getDocumentById(id);
+    async deleteDocument(id: string, userId: string) {
+        await this.getDocumentById(id, userId);
 
         return this.prisma.document.delete({
             where: { id },

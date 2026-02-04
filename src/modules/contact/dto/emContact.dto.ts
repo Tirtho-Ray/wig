@@ -14,9 +14,6 @@ export class CreateEmContactDto {
     @IsString()
     @IsOptional()
     phoneNumber: string;
-
-    @ApiProperty({ example: 'user-uuid-here' })
-    userId: string;
 }
 
 export class UpdateEmContactDto extends PartialType(CreateEmContactDto) {}
