@@ -53,9 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Document: 'Document',
   EmContact: 'EmContact',
-  User: 'User',
   FaceBiometric: 'FaceBiometric',
-  RefreshToken: 'RefreshToken'
+  RefreshToken: 'RefreshToken',
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -101,25 +101,6 @@ export const EmContactScalarFieldEnum = {
 export type EmContactScalarFieldEnum = (typeof EmContactScalarFieldEnum)[keyof typeof EmContactScalarFieldEnum]
 
 
-export const UserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  password: 'password',
-  mobile: 'mobile',
-  profile: 'profile',
-  language: 'language',
-  status: 'status',
-  mfaEnabled: 'mfaEnabled',
-  preferredMethod: 'preferredMethod',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
 export const FaceBiometricScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -135,18 +116,42 @@ export type FaceBiometricScalarFieldEnum = (typeof FaceBiometricScalarFieldEnum)
 
 export const RefreshTokenScalarFieldEnum = {
   id: 'id',
+  jti: 'jti',
   tokenHash: 'tokenHash',
   userId: 'userId',
   deviceId: 'deviceId',
   userAgent: 'userAgent',
   ipAddress: 'ipAddress',
-  isRevoked: 'isRevoked',
-  expiresAt: 'expiresAt',
   lastUsedAt: 'lastUsedAt',
+  expiresAt: 'expiresAt',
+  isRevoked: 'isRevoked',
   createdAt: 'createdAt'
 } as const
 
 export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  password: 'password',
+  mobile: 'mobile',
+  profile: 'profile',
+  role: 'role',
+  language: 'language',
+  status: 'status',
+  mfaEnabled: 'mfaEnabled',
+  preferredMethod: 'preferredMethod',
+  failedLoginAttempts: 'failedLoginAttempts',
+  lastFailedAttempt: 'lastFailedAttempt',
+  lockUntil: 'lockUntil',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {

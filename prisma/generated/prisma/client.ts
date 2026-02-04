@@ -48,11 +48,6 @@ export type Document = Prisma.DocumentModel
  */
 export type EmContact = Prisma.EmContactModel
 /**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
-/**
  * Model FaceBiometric
  * 
  */
@@ -62,3 +57,8 @@ export type FaceBiometric = Prisma.FaceBiometricModel
  * 
  */
 export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

@@ -65,75 +65,38 @@
 
 
 model User {
-  id       String     @id @default(uuid())
-  email    String     @unique
-  name     String
-  password String
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
 
-  mobile   String?
-  profile  String?
+  mobile    String?
+  profile   String?
+  role      UserRole
 
-  language Language   @default(English)
-  status   UserStatus @default(PENDING)
-
+  language  Language   @default(English)
+  status    UserStatus @default(PENDING)
 
   mfaEnabled      Boolean    @default(false)
   preferredMethod AuthMethod @default(PASSWORD)
 
+ 
   faceBiometric  FaceBiometric?
   refreshTokens  RefreshToken[]
+
+  failedLoginAttempts Int       @default(0)
+  lastFailedAttempt   DateTime? 
+  lockUntil           DateTime?
 
   emergencyContact EmContact[]
   document         Document[]
 
-
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-
-  @@index([email, status])
-}
+  deletedAt DateTime? 
 
 
-model FaceBiometric {
-  id             String   @id @default(uuid())
-  userId         String   @unique
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-
-  faceDescriptor Float[]
-
-
-  version     Int      @default(1)
-  lastUsedAt DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-
-model RefreshToken {
-  id        String   @id @default(uuid())
-
-
-  tokenHash String   @unique
-
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  deviceId   String
-  userAgent String
-  ipAddress String
-
-
-  isRevoked Boolean  @default(false)
-  expiresAt DateTime
-  lastUsedAt DateTime?
-
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-  @@index([userId, deviceId])
+  @@index([email, status, deletedAt])
 }
 
 
@@ -153,3 +116,8 @@ enum AuthMethod {
   FACE_ID
 }
 
+enum UserRole {
+  USER
+  ADMIN 
+  SUPER_ADMIN
+}
