@@ -10,36 +10,37 @@ import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DocumentModule } from './modules/document/document.module';
 import { EmContactModule } from './modules/contact/contace.module';
+import { AtStrategy } from './core/jwt/at.strategy';
 
 @Module({
   imports: [
-    // Rate Limiting Configuration
     ThrottlerModule.forRoot([{
       name: 'short',
-      ttl: 1000,    
-      limit: 3,     
+      ttl: 1000,
+      limit: 3,
     }, {
       name: 'auth',
-      ttl: 60000,   
-      limit: 5,     
+      ttl: 60000,
+      limit: 5,
     }]),
-    
-    ScheduleModule.forRoot(), 
-    
+
+    ScheduleModule.forRoot(),
+
     ConfigurationModule,
     AuthModule,
     UserModule,
     PrismaModule,
     DocumentModule,
-    EmContactModule
+    EmContactModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    AtStrategy,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,26 +1,40 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Request } from 'express';
 
 @Injectable()
 export class AtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(config: ConfigService) {
+  constructor(private config: ConfigService) {
     const secret = config.get<string>('jwt.access_secret');
-    
+    const issuer = config.get<string>('jwt.issuer');
+    const audience = config.get<string>('jwt.audience');
+
     if (!secret) {
-      throw new InternalServerErrorException('Access secret not found in config');
+      throw new InternalServerErrorException('JWT Access Secret is missing in config');
     }
 
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) => {
+          return request?.cookies?.['access_token']; 
+        },
+        ExtractJwt.fromAuthHeaderAsBearerToken(), 
+      ]),
       secretOrKey: secret,
-      issuer: config.get<string>('jwt.issuer'),
-      audience: config.get<string>('jwt.audience'),
+      issuer: issuer,
+      audience: audience,
+      ignoreExpiration: false,
     });
   }
 
   validate(payload: any) {
+    console.log(' JWT Verified. Payload:', payload);
+
+    if (!payload) {
+      throw new UnauthorizedException('Invalid or empty token payload');
+    }
     return {
       id: payload.sub,
       email: payload.email,

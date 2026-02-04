@@ -188,7 +188,7 @@ export type RefreshTokenGroupByOutputType = {
   jti: string
   tokenHash: string
   userId: string
-  deviceId: string
+  deviceId: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt: Date | null
@@ -223,7 +223,7 @@ export type RefreshTokenWhereInput = {
   jti?: Prisma.StringFilter<"RefreshToken"> | string
   tokenHash?: Prisma.StringFilter<"RefreshToken"> | string
   userId?: Prisma.StringFilter<"RefreshToken"> | string
-  deviceId?: Prisma.StringFilter<"RefreshToken"> | string
+  deviceId?: Prisma.StringNullableFilter<"RefreshToken"> | string | null
   userAgent?: Prisma.StringFilter<"RefreshToken"> | string
   ipAddress?: Prisma.StringFilter<"RefreshToken"> | string
   lastUsedAt?: Prisma.DateTimeNullableFilter<"RefreshToken"> | Date | string | null
@@ -238,7 +238,7 @@ export type RefreshTokenOrderByWithRelationInput = {
   jti?: Prisma.SortOrder
   tokenHash?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  deviceId?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
   lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -256,7 +256,7 @@ export type RefreshTokenWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RefreshTokenWhereInput | Prisma.RefreshTokenWhereInput[]
   tokenHash?: Prisma.StringFilter<"RefreshToken"> | string
   userId?: Prisma.StringFilter<"RefreshToken"> | string
-  deviceId?: Prisma.StringFilter<"RefreshToken"> | string
+  deviceId?: Prisma.StringNullableFilter<"RefreshToken"> | string | null
   userAgent?: Prisma.StringFilter<"RefreshToken"> | string
   ipAddress?: Prisma.StringFilter<"RefreshToken"> | string
   lastUsedAt?: Prisma.DateTimeNullableFilter<"RefreshToken"> | Date | string | null
@@ -271,7 +271,7 @@ export type RefreshTokenOrderByWithAggregationInput = {
   jti?: Prisma.SortOrder
   tokenHash?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  deviceId?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrderInput | Prisma.SortOrder
   userAgent?: Prisma.SortOrder
   ipAddress?: Prisma.SortOrder
   lastUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -291,7 +291,7 @@ export type RefreshTokenScalarWhereWithAggregatesInput = {
   jti?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
   tokenHash?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
   userId?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
-  deviceId?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
+  deviceId?: Prisma.StringNullableWithAggregatesFilter<"RefreshToken"> | string | null
   userAgent?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
   ipAddress?: Prisma.StringWithAggregatesFilter<"RefreshToken"> | string
   lastUsedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RefreshToken"> | Date | string | null
@@ -304,7 +304,7 @@ export type RefreshTokenCreateInput = {
   id?: string
   jti: string
   tokenHash: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -319,7 +319,7 @@ export type RefreshTokenUncheckedCreateInput = {
   jti: string
   tokenHash: string
   userId: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -332,7 +332,7 @@ export type RefreshTokenUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -347,7 +347,7 @@ export type RefreshTokenUncheckedUpdateInput = {
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -361,7 +361,7 @@ export type RefreshTokenCreateManyInput = {
   jti: string
   tokenHash: string
   userId: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -374,7 +374,7 @@ export type RefreshTokenUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -388,7 +388,7 @@ export type RefreshTokenUncheckedUpdateManyInput = {
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -499,7 +499,7 @@ export type RefreshTokenCreateWithoutUserInput = {
   id?: string
   jti: string
   tokenHash: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -512,7 +512,7 @@ export type RefreshTokenUncheckedCreateWithoutUserInput = {
   id?: string
   jti: string
   tokenHash: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -555,7 +555,7 @@ export type RefreshTokenScalarWhereInput = {
   jti?: Prisma.StringFilter<"RefreshToken"> | string
   tokenHash?: Prisma.StringFilter<"RefreshToken"> | string
   userId?: Prisma.StringFilter<"RefreshToken"> | string
-  deviceId?: Prisma.StringFilter<"RefreshToken"> | string
+  deviceId?: Prisma.StringNullableFilter<"RefreshToken"> | string | null
   userAgent?: Prisma.StringFilter<"RefreshToken"> | string
   ipAddress?: Prisma.StringFilter<"RefreshToken"> | string
   lastUsedAt?: Prisma.DateTimeNullableFilter<"RefreshToken"> | Date | string | null
@@ -568,7 +568,7 @@ export type RefreshTokenCreateManyUserInput = {
   id?: string
   jti: string
   tokenHash: string
-  deviceId: string
+  deviceId?: string | null
   userAgent: string
   ipAddress: string
   lastUsedAt?: Date | string | null
@@ -581,7 +581,7 @@ export type RefreshTokenUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -594,7 +594,7 @@ export type RefreshTokenUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -607,7 +607,7 @@ export type RefreshTokenUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   jti?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceId?: Prisma.StringFieldUpdateOperationsInput | string
+  deviceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userAgent?: Prisma.StringFieldUpdateOperationsInput | string
   ipAddress?: Prisma.StringFieldUpdateOperationsInput | string
   lastUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -698,7 +698,7 @@ export type $RefreshTokenPayload<ExtArgs extends runtime.Types.Extensions.Intern
     jti: string
     tokenHash: string
     userId: string
-    deviceId: string
+    deviceId: string | null
     userAgent: string
     ipAddress: string
     lastUsedAt: Date | null

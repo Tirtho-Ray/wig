@@ -14,8 +14,9 @@ import { AuthService } from '../service/auth.service';
 import { RegisterDto } from '../dto/register.dto';
 import { LoginDto } from '../dto/login.dto';
 import { Throttle } from '@nestjs/throttler';
-import { AtGuard } from 'src/core/jwt/at.guard';
 import { GetUser } from 'src/core/jwt/get-user.decorator';
+import { JwtAuthGuard } from 'src/core/jwt/jwt-auth.guard';
+import { DeviceInfo, GetDeviceInfo } from '../utils/device-info.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -25,20 +26,11 @@ export class AuthController {
   @Post('register')
   async register(
     @Body() dto: RegisterDto,
-    @Req() req: Request,
+    @GetDeviceInfo() device: DeviceInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const deviceId = req.headers['x-device-id'] as string;
-    if (!deviceId) throw new UnauthorizedException('Device ID required');
-
-    const { access_token, refresh_token } = await this.authService.register(
-      dto,
-      req.headers['user-agent'] || 'unknown',
-      req.ip || '0.0.0.0',
-      deviceId,
-    );
-
-    this.setCookie(res, refresh_token);
+    const { access_token, refresh_token } = await this.authService.register(dto, device);
+    this.setCookies(res, access_token, refresh_token);
     return { message: 'Account created successfully', access_token };
   }
 
@@ -47,20 +39,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async login(
     @Body() dto: LoginDto,
-    @Req() req: Request,
+    @GetDeviceInfo() device: DeviceInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const deviceId = req.headers['x-device-id'] as string;
-    if (!deviceId) throw new UnauthorizedException('Device ID required');
-
-    const { access_token, refresh_token } = await this.authService.login(
-      dto,
-      req.headers['user-agent'] || 'unknown',
-      req.ip || '0.0.0.0',
-      deviceId,
-    );
-
-    this.setCookie(res, refresh_token);
+    const { access_token, refresh_token } = await this.authService.login(dto, device);
+    this.setCookies(res, access_token, refresh_token);
     return { message: 'Login successful', access_token };
   }
 
@@ -68,70 +51,61 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async refresh(
     @Req() req: Request,
+    @GetDeviceInfo() device: DeviceInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
     const token = req.cookies?.['refresh_token'];
-    const deviceId = req.headers['x-device-id'] as string;
-
     if (!token) throw new UnauthorizedException('No refresh token provided');
-    if (!deviceId) throw new UnauthorizedException('Device ID missing');
 
-    const { access_token, refresh_token } = await this.authService.refresh(
-      token,
-      deviceId,
-    );
-
-    this.setCookie(res, refresh_token);
+    const { access_token, refresh_token } = await this.authService.refresh(token, device);
+    this.setCookies(res, access_token, refresh_token);
     return { access_token };
   }
 
-  @UseGuards(AtGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   async logout(
     @GetUser('id') userId: string,
-    @Req() req: Request,
+    @GetDeviceInfo() device: DeviceInfo,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const deviceId = req.headers['x-device-id'] as string;
-
-    if (deviceId) {
-      await this.authService.logout(userId, deviceId);
-    }
-
-    this.clearCookie(res);
+    await this.authService.logout(userId, device.userAgent);
+    this.clearCookies(res);
     return { message: 'Logged out successfully' };
   }
 
-  @UseGuards(AtGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('logout-all')
   @HttpCode(HttpStatus.OK)
-  async logoutAll(
-    @GetUser('id') userId: string,
-    @Res({ passthrough: true }) res: Response,
-  ) {
+  async logoutAll(@GetUser('id') userId: string, @Res({ passthrough: true }) res: Response) {
     await this.authService.logoutAll(userId);
-    this.clearCookie(res);
+    this.clearCookies(res);
     return { message: 'Logged out from all devices' };
   }
 
-  private setCookie(res: Response, token: string) {
+  private setCookies(res: Response, access: string, refresh: string) {
     const isProd = process.env.NODE_ENV === 'production';
-    res.cookie('refresh_token', token, {
+    const commonOptions = {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? 'strict' : 'lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: (isProd ? 'strict' : 'lax') as 'strict' | 'lax',
       path: '/',
-    });
+    };
+
+    res.cookie('access_token', access, { ...commonOptions, maxAge: 15 * 60 * 1000 });
+    res.cookie('refresh_token', refresh, { ...commonOptions, maxAge: 7 * 24 * 60 * 60 * 1000 });
   }
 
-  private clearCookie(res: Response) {
-    res.clearCookie('refresh_token', {
+  private clearCookies(res: Response) {
+    const isProd = process.env.NODE_ENV === 'production';
+    const commonOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: isProd,
+      sameSite: (isProd ? 'strict' : 'lax') as 'strict' | 'lax',
       path: '/',
-    });
+    };
+    res.clearCookie('access_token', commonOptions);
+    res.clearCookie('refresh_token', commonOptions);
   }
 }

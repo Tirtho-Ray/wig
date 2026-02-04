@@ -14,7 +14,7 @@ export default () => ({
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
     refresh_ttl_days: parseInt(process.env.REFRESH_TOKEN_TTL_DAYS || '7', 10),
     
-    issuer: process.env.JWT_ISSUER || 'willgus_auth',
-    audience: process.env.JWT_AUDIENCE || 'willgus_app',
+    issuer: process.env.JWT_ISSUER || 'willgus_auth_service',
+    audience: process.env.JWT_AUDIENCE || 'willgus_web_client',
   },
 });

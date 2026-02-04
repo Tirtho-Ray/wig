@@ -6,7 +6,7 @@ model RefreshToken {
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  deviceId   String
+  deviceId   String?
   userAgent  String
   ipAddress  String
 

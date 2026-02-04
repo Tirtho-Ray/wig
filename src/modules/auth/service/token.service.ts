@@ -18,8 +18,6 @@ export class TokenService {
 
   async generateTokens(user: JwtPayload) {
     const jti = randomUUID();
-    
-    // config.ts এর নেস্টেড পাথ অনুযায়ী ডাটা রিড করা হচ্ছে
     const issuer = this.config.get<string>('jwt.issuer');
     const audience = this.config.get<string>('jwt.audience');
     const accessSecret = this.config.get<string>('jwt.access_secret');
