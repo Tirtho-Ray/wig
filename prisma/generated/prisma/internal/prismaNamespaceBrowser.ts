@@ -54,6 +54,9 @@ export const ModelName = {
   Document: 'Document',
   EmContact: 'EmContact',
   FaceBiometric: 'FaceBiometric',
+  Notification: 'Notification',
+  NotificationRecipient: 'NotificationRecipient',
+  NotificationPreference: 'NotificationPreference',
   RefreshToken: 'RefreshToken',
   User: 'User'
 } as const
@@ -114,6 +117,56 @@ export const FaceBiometricScalarFieldEnum = {
 export type FaceBiometricScalarFieldEnum = (typeof FaceBiometricScalarFieldEnum)[keyof typeof FaceBiometricScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  actorType: 'actorType',
+  actorId: 'actorId',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  title: 'title',
+  body: 'body',
+  type: 'type',
+  resourceType: 'resourceType',
+  resourceId: 'resourceId',
+  isGlobal: 'isGlobal',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const NotificationRecipientScalarFieldEnum = {
+  userId: 'userId',
+  notificationId: 'notificationId',
+  isRead: 'isRead',
+  readAt: 'readAt',
+  isDelivered: 'isDelivered'
+} as const
+
+export type NotificationRecipientScalarFieldEnum = (typeof NotificationRecipientScalarFieldEnum)[keyof typeof NotificationRecipientScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  inApp: 'inApp',
+  email: 'email',
+  push: 'push',
+  deviceAlerts: 'deviceAlerts',
+  videoUpload: 'videoUpload',
+  scheduleUpdates: 'scheduleUpdates',
+  systemAlerts: 'systemAlerts',
+  promotions: 'promotions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
+
+
 export const RefreshTokenScalarFieldEnum = {
   id: 'id',
   jti: 'jti',
@@ -162,6 +215,14 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullableJsonNullValueInput = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull'
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -176,4 +237,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

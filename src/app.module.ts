@@ -11,6 +11,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { DocumentModule } from './modules/document/document.module';
 import { EmContactModule } from './modules/contact/contace.module';
 import { AtStrategy } from './core/jwt/at.strategy';
+import { RedisModule } from './common/redis/redis.module';
+import { NotificationModule } from './modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { AtStrategy } from './core/jwt/at.strategy';
     PrismaModule,
     DocumentModule,
     EmContactModule,
+    RedisModule,
+    NotificationModule
   ],
   controllers: [AppController],
   providers: [

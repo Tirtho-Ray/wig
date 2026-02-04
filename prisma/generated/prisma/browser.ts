@@ -33,6 +33,21 @@ export type EmContact = Prisma.EmContactModel
  */
 export type FaceBiometric = Prisma.FaceBiometricModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model NotificationRecipient
+ * 
+ */
+export type NotificationRecipient = Prisma.NotificationRecipientModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
  * Model RefreshToken
  * 
  */

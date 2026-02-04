@@ -63,42 +63,41 @@
 //   FACE_ID
 // }
 
-
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
-  password  String
+  id       String @id @default(uuid())
+  email    String @unique
+  name     String
+  password String
 
-  mobile    String?
-  profile   String?
-  role      UserRole
+  mobile  String?
+  profile String?
+  role    UserRole
 
-  language  Language   @default(English)
-  status    UserStatus @default(PENDING)
+  language Language   @default(English)
+  status   UserStatus @default(PENDING)
 
   mfaEnabled      Boolean    @default(false)
   preferredMethod AuthMethod @default(PASSWORD)
 
- 
-  faceBiometric  FaceBiometric?
-  refreshTokens  RefreshToken[]
+  faceBiometric FaceBiometric?
+  refreshTokens RefreshToken[]
 
   failedLoginAttempts Int       @default(0)
-  lastFailedAttempt   DateTime? 
+  lastFailedAttempt   DateTime?
   lockUntil           DateTime?
 
   emergencyContact EmContact[]
   document         Document[]
 
+  notificationProvisions NotificationRecipient[]
+  notificationPermission NotificationPreference?
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  deletedAt DateTime? 
-
+  deletedAt DateTime?
 
   @@index([email, status, deletedAt])
 }
-
 
 enum Language {
   English
@@ -118,6 +117,6 @@ enum AuthMethod {
 
 enum UserRole {
   USER
-  ADMIN 
+  ADMIN
   SUPER_ADMIN
 }

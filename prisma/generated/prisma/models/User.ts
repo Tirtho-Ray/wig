@@ -316,6 +316,8 @@ export type UserWhereInput = {
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
   document?: Prisma.DocumentListRelationFilter
+  notificationProvisions?: Prisma.NotificationRecipientListRelationFilter
+  notificationPermission?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -340,6 +342,8 @@ export type UserOrderByWithRelationInput = {
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   emergencyContact?: Prisma.EmContactOrderByRelationAggregateInput
   document?: Prisma.DocumentOrderByRelationAggregateInput
+  notificationProvisions?: Prisma.NotificationRecipientOrderByRelationAggregateInput
+  notificationPermission?: Prisma.NotificationPreferenceOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -367,6 +371,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
   document?: Prisma.DocumentListRelationFilter
+  notificationProvisions?: Prisma.NotificationRecipientListRelationFilter
+  notificationPermission?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -439,6 +445,8 @@ export type UserCreateInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -463,6 +471,8 @@ export type UserUncheckedCreateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -487,6 +497,8 @@ export type UserUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -511,6 +523,8 @@ export type UserUncheckedUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -688,6 +702,34 @@ export type UserUpdateOneRequiredWithoutFaceBiometricNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaceBiometricInput, Prisma.UserUpdateWithoutFaceBiometricInput>, Prisma.UserUncheckedUpdateWithoutFaceBiometricInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationProvisionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationProvisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationProvisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationProvisionsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationProvisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationProvisionsInput, Prisma.UserUpdateWithoutNotificationProvisionsInput>, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationPermissionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPermissionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationPermissionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPermissionInput
+  upsert?: Prisma.UserUpsertWithoutNotificationPermissionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationPermissionInput, Prisma.UserUpdateWithoutNotificationPermissionInput>, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
+}
+
 export type UserCreateNestedOneWithoutRefreshTokensInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
@@ -739,6 +781,8 @@ export type UserCreateWithoutDocumentInput = {
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentInput = {
@@ -762,6 +806,8 @@ export type UserUncheckedCreateWithoutDocumentInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentInput = {
@@ -801,6 +847,8 @@ export type UserUpdateWithoutDocumentInput = {
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentInput = {
@@ -824,6 +872,8 @@ export type UserUncheckedUpdateWithoutDocumentInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmergencyContactInput = {
@@ -847,6 +897,8 @@ export type UserCreateWithoutEmergencyContactInput = {
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmergencyContactInput = {
@@ -870,6 +922,8 @@ export type UserUncheckedCreateWithoutEmergencyContactInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmergencyContactInput = {
@@ -909,6 +963,8 @@ export type UserUpdateWithoutEmergencyContactInput = {
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmergencyContactInput = {
@@ -932,6 +988,8 @@ export type UserUncheckedUpdateWithoutEmergencyContactInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFaceBiometricInput = {
@@ -955,6 +1013,8 @@ export type UserCreateWithoutFaceBiometricInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFaceBiometricInput = {
@@ -978,6 +1038,8 @@ export type UserUncheckedCreateWithoutFaceBiometricInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFaceBiometricInput = {
@@ -1017,6 +1079,8 @@ export type UserUpdateWithoutFaceBiometricInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFaceBiometricInput = {
@@ -1040,6 +1104,240 @@ export type UserUncheckedUpdateWithoutFaceBiometricInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationProvisionsInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationProvisionsInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationProvisionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+}
+
+export type UserUpsertWithoutNotificationProvisionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationProvisionsInput, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationProvisionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationProvisionsInput, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+}
+
+export type UserUpdateWithoutNotificationProvisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationProvisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationPermissionInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationPermissionInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationPermissionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+}
+
+export type UserUpsertWithoutNotificationPermissionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPermissionInput, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationPermissionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPermissionInput, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
+}
+
+export type UserUpdateWithoutNotificationPermissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationPermissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1063,6 +1361,8 @@ export type UserCreateWithoutRefreshTokensInput = {
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1086,6 +1386,8 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1125,6 +1427,8 @@ export type UserUpdateWithoutRefreshTokensInput = {
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1148,6 +1452,8 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -1159,12 +1465,14 @@ export type UserCountOutputType = {
   refreshTokens: number
   emergencyContact: number
   document: number
+  notificationProvisions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   emergencyContact?: boolean | UserCountOutputTypeCountEmergencyContactArgs
   document?: boolean | UserCountOutputTypeCountDocumentArgs
+  notificationProvisions?: boolean | UserCountOutputTypeCountNotificationProvisionsArgs
 }
 
 /**
@@ -1198,6 +1506,13 @@ export type UserCountOutputTypeCountDocumentArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.DocumentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationProvisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationRecipientWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1221,6 +1536,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
   document?: boolean | Prisma.User$documentArgs<ExtArgs>
+  notificationProvisions?: boolean | Prisma.User$notificationProvisionsArgs<ExtArgs>
+  notificationPermission?: boolean | Prisma.User$notificationPermissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1290,6 +1607,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
   document?: boolean | Prisma.User$documentArgs<ExtArgs>
+  notificationProvisions?: boolean | Prisma.User$notificationProvisionsArgs<ExtArgs>
+  notificationPermission?: boolean | Prisma.User$notificationPermissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1302,6 +1621,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     emergencyContact: Prisma.$EmContactPayload<ExtArgs>[]
     document: Prisma.$DocumentPayload<ExtArgs>[]
+    notificationProvisions: Prisma.$NotificationRecipientPayload<ExtArgs>[]
+    notificationPermission: Prisma.$NotificationPreferencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1719,6 +2040,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emergencyContact<T extends Prisma.User$emergencyContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emergencyContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   document<T extends Prisma.User$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationProvisions<T extends Prisma.User$notificationProvisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationProvisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationPermission<T extends Prisma.User$notificationPermissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationPermissionArgs<ExtArgs>>): Prisma.Prisma__NotificationPreferenceClient<runtime.Types.Result.GetResult<Prisma.$NotificationPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2241,6 +2564,49 @@ export type User$documentArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
+}
+
+/**
+ * User.notificationProvisions
+ */
+export type User$notificationProvisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationRecipient
+   */
+  select?: Prisma.NotificationRecipientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationRecipient
+   */
+  omit?: Prisma.NotificationRecipientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationRecipientInclude<ExtArgs> | null
+  where?: Prisma.NotificationRecipientWhereInput
+  orderBy?: Prisma.NotificationRecipientOrderByWithRelationInput | Prisma.NotificationRecipientOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationRecipientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationRecipientScalarFieldEnum | Prisma.NotificationRecipientScalarFieldEnum[]
+}
+
+/**
+ * User.notificationPermission
+ */
+export type User$notificationPermissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationPreference
+   */
+  select?: Prisma.NotificationPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationPreference
+   */
+  omit?: Prisma.NotificationPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationPreferenceInclude<ExtArgs> | null
+  where?: Prisma.NotificationPreferenceWhereInput
 }
 
 /**
