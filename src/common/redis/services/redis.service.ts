@@ -1,4 +1,3 @@
-// src/redis/redis.service.ts
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Redis from 'ioredis';
@@ -7,7 +6,7 @@ import Redis from 'ioredis';
 export class RedisService implements OnModuleInit {
   private redis: Redis;
 
-  constructor(private readonly configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) { }
 
   onModuleInit() {
     const redisUrl =

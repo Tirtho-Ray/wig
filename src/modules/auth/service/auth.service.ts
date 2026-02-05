@@ -21,7 +21,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly tokenService: TokenService,
     private readonly config: ConfigService,
-  ) {}
+  ) { }
 
   async register(payload: RegisterDto, device: DeviceInfo) {
     const existing = await this.prisma.user.findUnique({ where: { email: payload.email } });
@@ -46,13 +46,12 @@ export class AuthService {
 
   async login(payload: LoginDto, device: DeviceInfo
   ) {
-    // ১. প্রি-ভ্যালিডেশন: ডাটাবেস হিটের আগে সাধারণ চেক
+
     if (!payload.email || !payload.password) throw new UnauthorizedException('Missing credentials');
 
     const user = await this.prisma.user.findUnique({ where: { email: payload.email } });
     if (!user) throw new UnauthorizedException('Invalid credentials');
 
-    // ২. অ্যাকাউন্ট লক চেক
     if (user.lockUntil && user.lockUntil > new Date()) {
       throw new ForbiddenException('Account temporarily locked');
     }
@@ -75,7 +74,6 @@ export class AuthService {
       throw new ForbiddenException(`Account is ${user.status.toLowerCase()}`);
     }
 
-    // ৩. ট্রানজেকশনের মাধ্যমে সেশন এবং লগইন অ্যাটেম্পট আপডেট (Scalability & Race Condition Fix)
     return this.prisma.$transaction(async (tx) => {
       await tx.user.update({
         where: { id: user.id },
@@ -116,7 +114,7 @@ export class AuthService {
     device: DeviceInfo,
     tx: Prisma.TransactionClient,
   ) {
-    // ৪. রেস কন্ডিশন প্রিভেন্ট করতে ট্রানজেকশনের ভেতরে কাউন্ট ও ডিলিট
+
     const activeSessions = await tx.refreshToken.findMany({
       where: { userId: user.id },
       orderBy: { createdAt: 'asc' },
@@ -133,7 +131,6 @@ export class AuthService {
       role: user.role,
     });
 
-    // ৫. সিকিউরিটি হ্যাশ (ভবিষ্যতে এটিকে Redis এ মুভ করা যেতে পারে)
     const tokenHash = await SecurityUtil.hashData(refreshToken);
     const ttlDays = this.config.get<number>('jwt.refresh_ttl_days') || 7;
 

@@ -15,6 +15,8 @@ import { RedisModule } from './common/redis/redis.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { UserModule } from './modules/user/user.module';
 import { FileModule } from './lib/file/file.module';
+import { SeederService } from './core/seed/seed.service';
+import { EmailService } from './lib/email/email.service';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { FileModule } from './lib/file/file.module';
   providers: [
     AppService,
     AtStrategy,
+    SeederService,
+    EmailService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

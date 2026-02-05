@@ -3,16 +3,21 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
+import { SeederService } from './core/seed/seed.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const seeder = app.get(SeederService);
+  await seeder.seedAdmin();
+
   app.getHttpAdapter().getInstance().set('trust proxy', true);
   // main.ts
   app.enableCors({
-    origin: true, 
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    allowedHeaders: 'Content-Type, Accept, Authorization', 
+    allowedHeaders: 'Content-Type, Accept, Authorization',
   });
   // Middleware
   app.use(cookieParser());
