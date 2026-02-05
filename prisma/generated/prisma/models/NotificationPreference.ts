@@ -28,13 +28,9 @@ export type NotificationPreferenceMinAggregateOutputType = {
   id: string | null
   userId: string | null
   inApp: boolean | null
-  email: boolean | null
-  push: boolean | null
-  deviceAlerts: boolean | null
-  videoUpload: boolean | null
-  scheduleUpdates: boolean | null
   systemAlerts: boolean | null
-  promotions: boolean | null
+  safe: boolean | null
+  UnSafe: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -43,13 +39,9 @@ export type NotificationPreferenceMaxAggregateOutputType = {
   id: string | null
   userId: string | null
   inApp: boolean | null
-  email: boolean | null
-  push: boolean | null
-  deviceAlerts: boolean | null
-  videoUpload: boolean | null
-  scheduleUpdates: boolean | null
   systemAlerts: boolean | null
-  promotions: boolean | null
+  safe: boolean | null
+  UnSafe: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,13 +50,9 @@ export type NotificationPreferenceCountAggregateOutputType = {
   id: number
   userId: number
   inApp: number
-  email: number
-  push: number
-  deviceAlerts: number
-  videoUpload: number
-  scheduleUpdates: number
   systemAlerts: number
-  promotions: number
+  safe: number
+  UnSafe: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -75,13 +63,9 @@ export type NotificationPreferenceMinAggregateInputType = {
   id?: true
   userId?: true
   inApp?: true
-  email?: true
-  push?: true
-  deviceAlerts?: true
-  videoUpload?: true
-  scheduleUpdates?: true
   systemAlerts?: true
-  promotions?: true
+  safe?: true
+  UnSafe?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -90,13 +74,9 @@ export type NotificationPreferenceMaxAggregateInputType = {
   id?: true
   userId?: true
   inApp?: true
-  email?: true
-  push?: true
-  deviceAlerts?: true
-  videoUpload?: true
-  scheduleUpdates?: true
   systemAlerts?: true
-  promotions?: true
+  safe?: true
+  UnSafe?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -105,13 +85,9 @@ export type NotificationPreferenceCountAggregateInputType = {
   id?: true
   userId?: true
   inApp?: true
-  email?: true
-  push?: true
-  deviceAlerts?: true
-  videoUpload?: true
-  scheduleUpdates?: true
   systemAlerts?: true
-  promotions?: true
+  safe?: true
+  UnSafe?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -193,13 +169,9 @@ export type NotificationPreferenceGroupByOutputType = {
   id: string
   userId: string
   inApp: boolean
-  email: boolean
-  push: boolean
-  deviceAlerts: boolean
-  videoUpload: boolean
-  scheduleUpdates: boolean
   systemAlerts: boolean
-  promotions: boolean
+  safe: boolean
+  UnSafe: boolean
   createdAt: Date
   updatedAt: Date
   _count: NotificationPreferenceCountAggregateOutputType | null
@@ -229,13 +201,9 @@ export type NotificationPreferenceWhereInput = {
   id?: Prisma.StringFilter<"NotificationPreference"> | string
   userId?: Prisma.StringFilter<"NotificationPreference"> | string
   inApp?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  email?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  push?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  deviceAlerts?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  videoUpload?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  scheduleUpdates?: Prisma.BoolFilter<"NotificationPreference"> | boolean
   systemAlerts?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  promotions?: Prisma.BoolFilter<"NotificationPreference"> | boolean
+  safe?: Prisma.BoolFilter<"NotificationPreference"> | boolean
+  UnSafe?: Prisma.BoolFilter<"NotificationPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"NotificationPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"NotificationPreference"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -245,13 +213,9 @@ export type NotificationPreferenceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   inApp?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  push?: Prisma.SortOrder
-  deviceAlerts?: Prisma.SortOrder
-  videoUpload?: Prisma.SortOrder
-  scheduleUpdates?: Prisma.SortOrder
   systemAlerts?: Prisma.SortOrder
-  promotions?: Prisma.SortOrder
+  safe?: Prisma.SortOrder
+  UnSafe?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -264,13 +228,9 @@ export type NotificationPreferenceWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.NotificationPreferenceWhereInput[]
   NOT?: Prisma.NotificationPreferenceWhereInput | Prisma.NotificationPreferenceWhereInput[]
   inApp?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  email?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  push?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  deviceAlerts?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  videoUpload?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  scheduleUpdates?: Prisma.BoolFilter<"NotificationPreference"> | boolean
   systemAlerts?: Prisma.BoolFilter<"NotificationPreference"> | boolean
-  promotions?: Prisma.BoolFilter<"NotificationPreference"> | boolean
+  safe?: Prisma.BoolFilter<"NotificationPreference"> | boolean
+  UnSafe?: Prisma.BoolFilter<"NotificationPreference"> | boolean
   createdAt?: Prisma.DateTimeFilter<"NotificationPreference"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"NotificationPreference"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -280,13 +240,9 @@ export type NotificationPreferenceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   inApp?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  push?: Prisma.SortOrder
-  deviceAlerts?: Prisma.SortOrder
-  videoUpload?: Prisma.SortOrder
-  scheduleUpdates?: Prisma.SortOrder
   systemAlerts?: Prisma.SortOrder
-  promotions?: Prisma.SortOrder
+  safe?: Prisma.SortOrder
+  UnSafe?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.NotificationPreferenceCountOrderByAggregateInput
@@ -301,13 +257,9 @@ export type NotificationPreferenceScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"NotificationPreference"> | string
   userId?: Prisma.StringWithAggregatesFilter<"NotificationPreference"> | string
   inApp?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  email?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  push?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  deviceAlerts?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  videoUpload?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  scheduleUpdates?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
   systemAlerts?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
-  promotions?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
+  safe?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
+  UnSafe?: Prisma.BoolWithAggregatesFilter<"NotificationPreference"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"NotificationPreference"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"NotificationPreference"> | Date | string
 }
@@ -315,13 +267,9 @@ export type NotificationPreferenceScalarWhereWithAggregatesInput = {
 export type NotificationPreferenceCreateInput = {
   id?: string
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutNotificationPermissionInput
@@ -331,13 +279,9 @@ export type NotificationPreferenceUncheckedCreateInput = {
   id?: string
   userId: string
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -345,13 +289,9 @@ export type NotificationPreferenceUncheckedCreateInput = {
 export type NotificationPreferenceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutNotificationPermissionNestedInput
@@ -361,13 +301,9 @@ export type NotificationPreferenceUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -376,13 +312,9 @@ export type NotificationPreferenceCreateManyInput = {
   id?: string
   userId: string
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -390,13 +322,9 @@ export type NotificationPreferenceCreateManyInput = {
 export type NotificationPreferenceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -405,13 +333,9 @@ export type NotificationPreferenceUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -420,13 +344,9 @@ export type NotificationPreferenceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   inApp?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  push?: Prisma.SortOrder
-  deviceAlerts?: Prisma.SortOrder
-  videoUpload?: Prisma.SortOrder
-  scheduleUpdates?: Prisma.SortOrder
   systemAlerts?: Prisma.SortOrder
-  promotions?: Prisma.SortOrder
+  safe?: Prisma.SortOrder
+  UnSafe?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -435,13 +355,9 @@ export type NotificationPreferenceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   inApp?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  push?: Prisma.SortOrder
-  deviceAlerts?: Prisma.SortOrder
-  videoUpload?: Prisma.SortOrder
-  scheduleUpdates?: Prisma.SortOrder
   systemAlerts?: Prisma.SortOrder
-  promotions?: Prisma.SortOrder
+  safe?: Prisma.SortOrder
+  UnSafe?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,13 +366,9 @@ export type NotificationPreferenceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   inApp?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  push?: Prisma.SortOrder
-  deviceAlerts?: Prisma.SortOrder
-  videoUpload?: Prisma.SortOrder
-  scheduleUpdates?: Prisma.SortOrder
   systemAlerts?: Prisma.SortOrder
-  promotions?: Prisma.SortOrder
+  safe?: Prisma.SortOrder
+  UnSafe?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -501,13 +413,9 @@ export type NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput = {
 export type NotificationPreferenceCreateWithoutUserInput = {
   id?: string
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -515,13 +423,9 @@ export type NotificationPreferenceCreateWithoutUserInput = {
 export type NotificationPreferenceUncheckedCreateWithoutUserInput = {
   id?: string
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -545,13 +449,9 @@ export type NotificationPreferenceUpdateToOneWithWhereWithoutUserInput = {
 export type NotificationPreferenceUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -559,13 +459,9 @@ export type NotificationPreferenceUpdateWithoutUserInput = {
 export type NotificationPreferenceUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   inApp?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  email?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  push?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  deviceAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  videoUpload?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  scheduleUpdates?: Prisma.BoolFieldUpdateOperationsInput | boolean
   systemAlerts?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  promotions?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safe?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  UnSafe?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -576,13 +472,9 @@ export type NotificationPreferenceSelect<ExtArgs extends runtime.Types.Extension
   id?: boolean
   userId?: boolean
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -592,13 +484,9 @@ export type NotificationPreferenceSelectCreateManyAndReturn<ExtArgs extends runt
   id?: boolean
   userId?: boolean
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -608,13 +496,9 @@ export type NotificationPreferenceSelectUpdateManyAndReturn<ExtArgs extends runt
   id?: boolean
   userId?: boolean
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -624,18 +508,14 @@ export type NotificationPreferenceSelectScalar = {
   id?: boolean
   userId?: boolean
   inApp?: boolean
-  email?: boolean
-  push?: boolean
-  deviceAlerts?: boolean
-  videoUpload?: boolean
-  scheduleUpdates?: boolean
   systemAlerts?: boolean
-  promotions?: boolean
+  safe?: boolean
+  UnSafe?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type NotificationPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "inApp" | "email" | "push" | "deviceAlerts" | "videoUpload" | "scheduleUpdates" | "systemAlerts" | "promotions" | "createdAt" | "updatedAt", ExtArgs["result"]["notificationPreference"]>
+export type NotificationPreferenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "inApp" | "systemAlerts" | "safe" | "UnSafe" | "createdAt" | "updatedAt", ExtArgs["result"]["notificationPreference"]>
 export type NotificationPreferenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -655,13 +535,9 @@ export type $NotificationPreferencePayload<ExtArgs extends runtime.Types.Extensi
     id: string
     userId: string
     inApp: boolean
-    email: boolean
-    push: boolean
-    deviceAlerts: boolean
-    videoUpload: boolean
-    scheduleUpdates: boolean
     systemAlerts: boolean
-    promotions: boolean
+    safe: boolean
+    UnSafe: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["notificationPreference"]>
@@ -1091,13 +967,9 @@ export interface NotificationPreferenceFieldRefs {
   readonly id: Prisma.FieldRef<"NotificationPreference", 'String'>
   readonly userId: Prisma.FieldRef<"NotificationPreference", 'String'>
   readonly inApp: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly email: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly push: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly deviceAlerts: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly videoUpload: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly scheduleUpdates: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
   readonly systemAlerts: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
-  readonly promotions: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
+  readonly safe: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
+  readonly UnSafe: Prisma.FieldRef<"NotificationPreference", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"NotificationPreference", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"NotificationPreference", 'DateTime'>
 }

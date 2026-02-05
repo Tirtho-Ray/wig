@@ -1,11 +1,11 @@
 model NotificationPreference {
-    id        String   @id @default(uuid())
-    userId    String   @unique
+    id     String @id @default(uuid())
+    userId String @unique
 
-
-    inApp     Boolean  @default(true)
-    systemAlerts      Boolean @default(true)
-
+    inApp        Boolean @default(true)
+    systemAlerts Boolean @default(true)
+    safe         Boolean @default(true)
+    UnSafe       Boolean @default(true)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

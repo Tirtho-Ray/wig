@@ -29,6 +29,7 @@ export type EmContactMinAggregateOutputType = {
   name: string | null
   relationship: string | null
   phoneNumber: string | null
+  email: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -39,6 +40,7 @@ export type EmContactMaxAggregateOutputType = {
   name: string | null
   relationship: string | null
   phoneNumber: string | null
+  email: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +51,7 @@ export type EmContactCountAggregateOutputType = {
   name: number
   relationship: number
   phoneNumber: number
+  email: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -61,6 +64,7 @@ export type EmContactMinAggregateInputType = {
   name?: true
   relationship?: true
   phoneNumber?: true
+  email?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -71,6 +75,7 @@ export type EmContactMaxAggregateInputType = {
   name?: true
   relationship?: true
   phoneNumber?: true
+  email?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +86,7 @@ export type EmContactCountAggregateInputType = {
   name?: true
   relationship?: true
   phoneNumber?: true
+  email?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -164,6 +170,7 @@ export type EmContactGroupByOutputType = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   userId: string
   createdAt: Date
   updatedAt: Date
@@ -195,6 +202,7 @@ export type EmContactWhereInput = {
   name?: Prisma.StringFilter<"EmContact"> | string
   relationship?: Prisma.StringFilter<"EmContact"> | string
   phoneNumber?: Prisma.StringFilter<"EmContact"> | string
+  email?: Prisma.StringFilter<"EmContact"> | string
   userId?: Prisma.StringFilter<"EmContact"> | string
   createdAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
@@ -206,6 +214,7 @@ export type EmContactOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -220,6 +229,7 @@ export type EmContactWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"EmContact"> | string
   relationship?: Prisma.StringFilter<"EmContact"> | string
   phoneNumber?: Prisma.StringFilter<"EmContact"> | string
+  email?: Prisma.StringFilter<"EmContact"> | string
   userId?: Prisma.StringFilter<"EmContact"> | string
   createdAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
@@ -231,6 +241,7 @@ export type EmContactOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -247,6 +258,7 @@ export type EmContactScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"EmContact"> | string
   relationship?: Prisma.StringWithAggregatesFilter<"EmContact"> | string
   phoneNumber?: Prisma.StringWithAggregatesFilter<"EmContact"> | string
+  email?: Prisma.StringWithAggregatesFilter<"EmContact"> | string
   userId?: Prisma.StringWithAggregatesFilter<"EmContact"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"EmContact"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"EmContact"> | Date | string
@@ -257,6 +269,7 @@ export type EmContactCreateInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutEmergencyContactInput
@@ -267,6 +280,7 @@ export type EmContactUncheckedCreateInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -277,6 +291,7 @@ export type EmContactUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutEmergencyContactNestedInput
@@ -287,6 +302,7 @@ export type EmContactUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -297,6 +313,7 @@ export type EmContactCreateManyInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -307,6 +324,7 @@ export type EmContactUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -316,6 +334,7 @@ export type EmContactUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -326,6 +345,7 @@ export type EmContactCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -336,6 +356,7 @@ export type EmContactMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -346,6 +367,7 @@ export type EmContactMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -408,6 +430,7 @@ export type EmContactCreateWithoutUserInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -417,6 +440,7 @@ export type EmContactUncheckedCreateWithoutUserInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -455,6 +479,7 @@ export type EmContactScalarWhereInput = {
   name?: Prisma.StringFilter<"EmContact"> | string
   relationship?: Prisma.StringFilter<"EmContact"> | string
   phoneNumber?: Prisma.StringFilter<"EmContact"> | string
+  email?: Prisma.StringFilter<"EmContact"> | string
   userId?: Prisma.StringFilter<"EmContact"> | string
   createdAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmContact"> | Date | string
@@ -465,6 +490,7 @@ export type EmContactCreateManyUserInput = {
   name: string
   relationship: string
   phoneNumber: string
+  email: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -474,6 +500,7 @@ export type EmContactUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -483,6 +510,7 @@ export type EmContactUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -492,6 +520,7 @@ export type EmContactUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -503,6 +532,7 @@ export type EmContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   name?: boolean
   relationship?: boolean
   phoneNumber?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -514,6 +544,7 @@ export type EmContactSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   name?: boolean
   relationship?: boolean
   phoneNumber?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -525,6 +556,7 @@ export type EmContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   name?: boolean
   relationship?: boolean
   phoneNumber?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -536,12 +568,13 @@ export type EmContactSelectScalar = {
   name?: boolean
   relationship?: boolean
   phoneNumber?: boolean
+  email?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type EmContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "relationship" | "phoneNumber" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["emContact"]>
+export type EmContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "relationship" | "phoneNumber" | "email" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["emContact"]>
 export type EmContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -562,6 +595,7 @@ export type $EmContactPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     name: string
     relationship: string
     phoneNumber: string
+    email: string
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -993,6 +1027,7 @@ export interface EmContactFieldRefs {
   readonly name: Prisma.FieldRef<"EmContact", 'String'>
   readonly relationship: Prisma.FieldRef<"EmContact", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"EmContact", 'String'>
+  readonly email: Prisma.FieldRef<"EmContact", 'String'>
   readonly userId: Prisma.FieldRef<"EmContact", 'String'>
   readonly createdAt: Prisma.FieldRef<"EmContact", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"EmContact", 'DateTime'>

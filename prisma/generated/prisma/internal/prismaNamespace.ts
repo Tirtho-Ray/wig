@@ -1061,6 +1061,7 @@ export const EmContactScalarFieldEnum = {
   name: 'name',
   relationship: 'relationship',
   phoneNumber: 'phoneNumber',
+  email: 'email',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1118,13 +1119,9 @@ export const NotificationPreferenceScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   inApp: 'inApp',
-  email: 'email',
-  push: 'push',
-  deviceAlerts: 'deviceAlerts',
-  videoUpload: 'videoUpload',
-  scheduleUpdates: 'scheduleUpdates',
   systemAlerts: 'systemAlerts',
-  promotions: 'promotions',
+  safe: 'safe',
+  UnSafe: 'UnSafe',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

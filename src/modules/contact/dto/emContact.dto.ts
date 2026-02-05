@@ -10,6 +10,10 @@ export class CreateEmContactDto {
     @IsString()
     relationship: string;
 
+    @ApiProperty({ example: 'bro@gmail.com' })
+    @IsString()
+    email: string;
+
     @ApiProperty({ example: '+8801700000000' })
     @IsString()
     @IsOptional()

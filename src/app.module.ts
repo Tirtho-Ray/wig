@@ -6,13 +6,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigurationModule } from './config/config.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
+
 import { PrismaModule } from './prisma/prisma.module';
 import { DocumentModule } from './modules/document/document.module';
 import { EmContactModule } from './modules/contact/contace.module';
 import { AtStrategy } from './core/jwt/at.strategy';
 import { RedisModule } from './common/redis/redis.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { UserModule } from './modules/user/user.module';
+import { FileModule } from './lib/file/file.module';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { NotificationModule } from './modules/notification/notification.module';
     }]),
 
     ScheduleModule.forRoot(),
-
+    FileModule,
     ConfigurationModule,
     AuthModule,
     UserModule,

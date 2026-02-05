@@ -4,21 +4,24 @@ import { CreateDocumentDto } from '../dto/document.dto';
 import { UpdateDocumentDto } from '../dto/updateDoc.dto';
 import { NotificationResourceType, NotificationType } from 'prisma/generated/prisma/enums';
 import { NotificationGateway } from 'src/modules/notification/gateway/notification.gateway';
+import { S3Service } from 'src/lib/file/service/s3.service';
 
 @Injectable()
 export class DocumentService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly notificationGateway: NotificationGateway,
+        private readonly s3Service: S3Service,
     ) { }
 
-    async createDocument(dto: CreateDocumentDto, userId: string) {
+
+    async createDocument(dto: CreateDocumentDto, userId: string, photoUrls: string[]) {
         const document = await this.prisma.document.create({
             data: {
                 label: dto.label,
                 value: dto.value,
                 category: dto.category,
-                documentPhoto: dto.documentPhoto,
+                documentPhoto: photoUrls,
                 userId: userId,
             },
         });
@@ -26,12 +29,15 @@ export class DocumentService {
         return document;
     }
 
+
+
     async getAllDocuments(userId: string) {
         return this.prisma.document.findMany({
             where: { userId },
             orderBy: { createdAt: 'desc' },
         });
     }
+
 
     async getDocumentById(id: string, userId: string) {
         const document = await this.prisma.document.findFirst({
@@ -45,21 +51,48 @@ export class DocumentService {
         return document;
     }
 
-    async updateDocument(id: string, dto: UpdateDocumentDto, userId: string) {
-        await this.getDocumentById(id, userId);
+
+    async updateDocument(id: string, dto: UpdateDocumentDto, userId: string, photoUrls?: string[]) {
+        const existingDoc = await this.getDocumentById(id, userId);
+
         const updated = await this.prisma.document.update({
             where: { id },
-            data: dto,
+            data: {
+                ...dto,
+                ...(photoUrls && { documentPhoto: photoUrls }),
+            },
         });
+
+        if (photoUrls && existingDoc.documentPhoto.length > 0) {
+            await Promise.all(existingDoc.documentPhoto.map(url => this.s3Service.deleteFile(url)));
+        }
+
         await this.sendDocumentNotification(userId, updated.label, 'updated');
         return updated;
     }
 
+    
     async deleteDocument(id: string, userId: string) {
-        const document = await this.getDocumentById(id, userId);
+        const document = await this.prisma.document.findFirst({
+            where: { id, userId },
+        });
+        if (!document) {
+            throw new NotFoundException('Document not found');
+        }
+
         await this.prisma.document.delete({
             where: { id },
         });
+        if (document.documentPhoto && document.documentPhoto.length > 0) {
+            try {
+                await Promise.all(
+                    document.documentPhoto.map((url) => this.s3Service.deleteFile(url))
+                );
+            } catch (error) {
+                console.error(`[S3 Cleanup Error] Failed to delete photos for doc ${id}:`, error);
+            }
+        }
+
         await this.sendDocumentNotification(userId, document.label, 'deleted');
         return { success: true };
     }
