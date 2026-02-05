@@ -94,6 +94,7 @@ export class UserController {
         return { message: 'Overview stats', data: stats };
     }
 
+
     @ApiTags('User Actions')
     @UseGuards(JwtAuthGuard)
     @Post('contact/send-email')
