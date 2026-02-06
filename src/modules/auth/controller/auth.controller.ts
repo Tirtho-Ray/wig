@@ -20,9 +20,9 @@ import { DeviceInfo, GetDeviceInfo } from '../utils/device-info.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
-  @Throttle({ auth: { limit: 3, ttl: 60000 } })
+  // @Throttle({ auth: { limit: 3, ttl: 60000 } })
   @Post('register')
   async register(
     @Body() dto: RegisterDto,
@@ -31,10 +31,10 @@ export class AuthController {
   ) {
     const { access_token, refresh_token } = await this.authService.register(dto, device);
     this.setCookies(res, access_token, refresh_token);
-    return { message: 'Account created successfully', access_token };
+    return { success: true, message: 'Account created successfully', access_token };
   }
 
-  @Throttle({ auth: { limit: 5, ttl: 60000 } })
+  // @Throttle({ auth: { limit: 5, ttl: 60000 } })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(
@@ -44,7 +44,7 @@ export class AuthController {
   ) {
     const { access_token, refresh_token } = await this.authService.login(dto, device);
     this.setCookies(res, access_token, refresh_token);
-    return { message: 'Login successful', access_token };
+    return { success: true, message: 'Login successful', access_token };
   }
 
   @Post('refresh')

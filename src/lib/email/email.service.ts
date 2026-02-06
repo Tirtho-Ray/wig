@@ -17,6 +17,9 @@ export class EmailService {
                 user: smtpConfig.user,
                 pass: smtpConfig.pass,
             },
+            tls: {
+                rejectUnauthorized: false
+            }
         });
     }
 
@@ -31,3 +34,5 @@ export class EmailService {
         });
     }
 }
+
+
