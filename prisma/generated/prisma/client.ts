@@ -48,17 +48,32 @@ export type Document = Prisma.DocumentModel
  */
 export type EmContact = Prisma.EmContactModel
 /**
- * Model User
- * 
- */
-export type User = Prisma.UserModel
-/**
  * Model FaceBiometric
  * 
  */
 export type FaceBiometric = Prisma.FaceBiometricModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model NotificationRecipient
+ * 
+ */
+export type NotificationRecipient = Prisma.NotificationRecipientModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel
+/**
  * Model RefreshToken
  * 
  */
 export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel

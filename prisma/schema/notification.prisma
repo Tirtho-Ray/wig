@@ -1,0 +1,67 @@
+
+
+model Notification {
+    id              String   @id @default(uuid())
+    actorType       NotificationActorType @default(SYSTEM)
+    actorId         String? 
+    senderId        String? 
+    receiverId      String?
+    title           String
+    body            String
+    type            NotificationType
+    resourceType    NotificationResourceType?
+    resourceId      String?
+    isGlobal        Boolean  @default(false)
+    metadata        Json?
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+    deletedAt       DateTime?
+
+    recipients NotificationRecipient[]
+}
+
+
+model NotificationRecipient {
+    userId         String
+    notificationId String
+    isRead         Boolean   @default(false)
+    readAt         DateTime?
+    isDelivered    Boolean   @default(false)
+
+    // Relations
+    user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    notification Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+
+    @@id([userId, notificationId])
+    @@map("notification_recipients")
+}
+
+enum NotificationType {
+    INFO
+    WARNING
+    ALERT
+    MESSAGE
+    TASK
+    SYSTEM
+    PROMOTION
+}
+
+enum NotificationResourceType {
+    EMERGENCY_CONTACT
+    SECURITY_ALERT
+    IDEATED_VERIFIED
+    MEMBERSHIP_RENEWS
+    PHONE_REPLACEMENT
+    SAFE
+    DOCUMENT
+    PROFILE_UPDATE
+    DELIVERY
+    DELIVERY_RECEIVE
+    OTHER
+}
+
+enum NotificationActorType {
+    USER
+    SYSTEM
+    DEVICE
+}

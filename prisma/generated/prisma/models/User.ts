@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  failedLoginAttempts: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  failedLoginAttempts: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -31,10 +41,14 @@ export type UserMinAggregateOutputType = {
   password: string | null
   mobile: string | null
   profile: string | null
+  role: $Enums.UserRole | null
   language: $Enums.Language | null
   status: $Enums.UserStatus | null
   mfaEnabled: boolean | null
   preferredMethod: $Enums.AuthMethod | null
+  failedLoginAttempts: number | null
+  lastFailedAttempt: Date | null
+  lockUntil: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -47,10 +61,14 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   mobile: string | null
   profile: string | null
+  role: $Enums.UserRole | null
   language: $Enums.Language | null
   status: $Enums.UserStatus | null
   mfaEnabled: boolean | null
   preferredMethod: $Enums.AuthMethod | null
+  failedLoginAttempts: number | null
+  lastFailedAttempt: Date | null
+  lockUntil: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
@@ -63,16 +81,28 @@ export type UserCountAggregateOutputType = {
   password: number
   mobile: number
   profile: number
+  role: number
   language: number
   status: number
   mfaEnabled: number
   preferredMethod: number
+  failedLoginAttempts: number
+  lastFailedAttempt: number
+  lockUntil: number
   createdAt: number
   updatedAt: number
   deletedAt: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  failedLoginAttempts?: true
+}
+
+export type UserSumAggregateInputType = {
+  failedLoginAttempts?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -81,10 +111,14 @@ export type UserMinAggregateInputType = {
   password?: true
   mobile?: true
   profile?: true
+  role?: true
   language?: true
   status?: true
   mfaEnabled?: true
   preferredMethod?: true
+  failedLoginAttempts?: true
+  lastFailedAttempt?: true
+  lockUntil?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -97,10 +131,14 @@ export type UserMaxAggregateInputType = {
   password?: true
   mobile?: true
   profile?: true
+  role?: true
   language?: true
   status?: true
   mfaEnabled?: true
   preferredMethod?: true
+  failedLoginAttempts?: true
+  lastFailedAttempt?: true
+  lockUntil?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -113,10 +151,14 @@ export type UserCountAggregateInputType = {
   password?: true
   mobile?: true
   profile?: true
+  role?: true
   language?: true
   status?: true
   mfaEnabled?: true
   preferredMethod?: true
+  failedLoginAttempts?: true
+  lastFailedAttempt?: true
+  lockUntil?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
@@ -161,6 +203,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -191,6 +245,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -202,14 +258,20 @@ export type UserGroupByOutputType = {
   password: string
   mobile: string | null
   profile: string | null
+  role: $Enums.UserRole
   language: $Enums.Language
   status: $Enums.UserStatus
   mfaEnabled: boolean
   preferredMethod: $Enums.AuthMethod
+  failedLoginAttempts: number
+  lastFailedAttempt: Date | null
+  lockUntil: Date | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -239,10 +301,14 @@ export type UserWhereInput = {
   password?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringNullableFilter<"User"> | string | null
   profile?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   language?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
   preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFilter<"User"> | number
+  lastFailedAttempt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lockUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -250,6 +316,8 @@ export type UserWhereInput = {
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
   document?: Prisma.DocumentListRelationFilter
+  notificationProvisions?: Prisma.NotificationRecipientListRelationFilter
+  notificationPermission?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -259,10 +327,14 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   profile?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   mfaEnabled?: Prisma.SortOrder
   preferredMethod?: Prisma.SortOrder
+  failedLoginAttempts?: Prisma.SortOrder
+  lastFailedAttempt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lockUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -270,6 +342,8 @@ export type UserOrderByWithRelationInput = {
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   emergencyContact?: Prisma.EmContactOrderByRelationAggregateInput
   document?: Prisma.DocumentOrderByRelationAggregateInput
+  notificationProvisions?: Prisma.NotificationRecipientOrderByRelationAggregateInput
+  notificationPermission?: Prisma.NotificationPreferenceOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -282,10 +356,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   mobile?: Prisma.StringNullableFilter<"User"> | string | null
   profile?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   language?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFilter<"User"> | boolean
   preferredMethod?: Prisma.EnumAuthMethodFilter<"User"> | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFilter<"User"> | number
+  lastFailedAttempt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lockUntil?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
@@ -293,6 +371,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   emergencyContact?: Prisma.EmContactListRelationFilter
   document?: Prisma.DocumentListRelationFilter
+  notificationProvisions?: Prisma.NotificationRecipientListRelationFilter
+  notificationPermission?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -302,16 +382,22 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrder
   mobile?: Prisma.SortOrderInput | Prisma.SortOrder
   profile?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   mfaEnabled?: Prisma.SortOrder
   preferredMethod?: Prisma.SortOrder
+  failedLoginAttempts?: Prisma.SortOrder
+  lastFailedAttempt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lockUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -324,10 +410,14 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   mobile?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   profile?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   language?: Prisma.EnumLanguageWithAggregatesFilter<"User"> | $Enums.Language
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   preferredMethod?: Prisma.EnumAuthMethodWithAggregatesFilter<"User"> | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntWithAggregatesFilter<"User"> | number
+  lastFailedAttempt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lockUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -340,10 +430,14 @@ export type UserCreateInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -351,6 +445,8 @@ export type UserCreateInput = {
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -360,10 +456,14 @@ export type UserUncheckedCreateInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -371,6 +471,8 @@ export type UserUncheckedCreateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -380,10 +482,14 @@ export type UserUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -391,6 +497,8 @@ export type UserUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -400,10 +508,14 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -411,6 +523,8 @@ export type UserUncheckedUpdateInput = {
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -420,10 +534,14 @@ export type UserCreateManyInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -436,10 +554,14 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -452,10 +574,14 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -473,13 +599,21 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   profile?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   mfaEnabled?: Prisma.SortOrder
   preferredMethod?: Prisma.SortOrder
+  failedLoginAttempts?: Prisma.SortOrder
+  lastFailedAttempt?: Prisma.SortOrder
+  lockUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  failedLoginAttempts?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -489,10 +623,14 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   profile?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   mfaEnabled?: Prisma.SortOrder
   preferredMethod?: Prisma.SortOrder
+  failedLoginAttempts?: Prisma.SortOrder
+  lastFailedAttempt?: Prisma.SortOrder
+  lockUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
@@ -505,13 +643,21 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   mobile?: Prisma.SortOrder
   profile?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   mfaEnabled?: Prisma.SortOrder
   preferredMethod?: Prisma.SortOrder
+  failedLoginAttempts?: Prisma.SortOrder
+  lastFailedAttempt?: Prisma.SortOrder
+  lockUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  failedLoginAttempts?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutDocumentInput = {
@@ -542,26 +688,6 @@ export type UserUpdateOneRequiredWithoutEmergencyContactNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEmergencyContactInput, Prisma.UserUpdateWithoutEmergencyContactInput>, Prisma.UserUncheckedUpdateWithoutEmergencyContactInput>
 }
 
-export type EnumLanguageFieldUpdateOperationsInput = {
-  set?: $Enums.Language
-}
-
-export type EnumUserStatusFieldUpdateOperationsInput = {
-  set?: $Enums.UserStatus
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type EnumAuthMethodFieldUpdateOperationsInput = {
-  set?: $Enums.AuthMethod
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type UserCreateNestedOneWithoutFaceBiometricInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutFaceBiometricInput, Prisma.UserUncheckedCreateWithoutFaceBiometricInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutFaceBiometricInput
@@ -574,6 +700,34 @@ export type UserUpdateOneRequiredWithoutFaceBiometricNestedInput = {
   upsert?: Prisma.UserUpsertWithoutFaceBiometricInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFaceBiometricInput, Prisma.UserUpdateWithoutFaceBiometricInput>, Prisma.UserUncheckedUpdateWithoutFaceBiometricInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationProvisionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationProvisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationProvisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationProvisionsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationProvisionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationProvisionsInput, Prisma.UserUpdateWithoutNotificationProvisionsInput>, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationPermissionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPermissionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationPermissionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationPermissionInput
+  upsert?: Prisma.UserUpsertWithoutNotificationPermissionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationPermissionInput, Prisma.UserUpdateWithoutNotificationPermissionInput>, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
 }
 
 export type UserCreateNestedOneWithoutRefreshTokensInput = {
@@ -590,6 +744,22 @@ export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokensInput, Prisma.UserUpdateWithoutRefreshTokensInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
 }
 
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
+}
+
+export type EnumLanguageFieldUpdateOperationsInput = {
+  set?: $Enums.Language
+}
+
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus
+}
+
+export type EnumAuthMethodFieldUpdateOperationsInput = {
+  set?: $Enums.AuthMethod
+}
+
 export type UserCreateWithoutDocumentInput = {
   id?: string
   email: string
@@ -597,16 +767,22 @@ export type UserCreateWithoutDocumentInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDocumentInput = {
@@ -616,16 +792,22 @@ export type UserUncheckedCreateWithoutDocumentInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDocumentInput = {
@@ -651,16 +833,22 @@ export type UserUpdateWithoutDocumentInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentInput = {
@@ -670,16 +858,22 @@ export type UserUncheckedUpdateWithoutDocumentInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmergencyContactInput = {
@@ -689,16 +883,22 @@ export type UserCreateWithoutEmergencyContactInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmergencyContactInput = {
@@ -708,16 +908,22 @@ export type UserUncheckedCreateWithoutEmergencyContactInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmergencyContactInput = {
@@ -743,16 +949,22 @@ export type UserUpdateWithoutEmergencyContactInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmergencyContactInput = {
@@ -762,16 +974,22 @@ export type UserUncheckedUpdateWithoutEmergencyContactInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFaceBiometricInput = {
@@ -781,16 +999,22 @@ export type UserCreateWithoutFaceBiometricInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFaceBiometricInput = {
@@ -800,16 +1024,22 @@ export type UserUncheckedCreateWithoutFaceBiometricInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFaceBiometricInput = {
@@ -835,16 +1065,22 @@ export type UserUpdateWithoutFaceBiometricInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFaceBiometricInput = {
@@ -854,16 +1090,254 @@ export type UserUncheckedUpdateWithoutFaceBiometricInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationProvisionsInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationProvisionsInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationProvisionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+}
+
+export type UserUpsertWithoutNotificationProvisionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationProvisionsInput, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationProvisionsInput, Prisma.UserUncheckedCreateWithoutNotificationProvisionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationProvisionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationProvisionsInput, Prisma.UserUncheckedUpdateWithoutNotificationProvisionsInput>
+}
+
+export type UserUpdateWithoutNotificationProvisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationProvisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationPermissionInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationPermissionInput = {
+  id?: string
+  email: string
+  name: string
+  password: string
+  mobile?: string | null
+  profile?: string | null
+  role: $Enums.UserRole
+  language?: $Enums.Language
+  status?: $Enums.UserStatus
+  mfaEnabled?: boolean
+  preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
+  document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationPermissionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+}
+
+export type UserUpsertWithoutNotificationPermissionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPermissionInput, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationPermissionInput, Prisma.UserUncheckedCreateWithoutNotificationPermissionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationPermissionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationPermissionInput, Prisma.UserUncheckedUpdateWithoutNotificationPermissionInput>
+}
+
+export type UserUpdateWithoutNotificationPermissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationPermissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
+  document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -873,16 +1347,22 @@ export type UserCreateWithoutRefreshTokensInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -892,16 +1372,22 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   password: string
   mobile?: string | null
   profile?: string | null
+  role: $Enums.UserRole
   language?: $Enums.Language
   status?: $Enums.UserStatus
   mfaEnabled?: boolean
   preferredMethod?: $Enums.AuthMethod
+  failedLoginAttempts?: number
+  lastFailedAttempt?: Date | string | null
+  lockUntil?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedCreateNestedOneWithoutUserInput
   emergencyContact?: Prisma.EmContactUncheckedCreateNestedManyWithoutUserInput
   document?: Prisma.DocumentUncheckedCreateNestedManyWithoutUserInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedCreateNestedManyWithoutUserInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -927,16 +1413,22 @@ export type UserUpdateWithoutRefreshTokensInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -946,16 +1438,22 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   language?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   mfaEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   preferredMethod?: Prisma.EnumAuthMethodFieldUpdateOperationsInput | $Enums.AuthMethod
+  failedLoginAttempts?: Prisma.IntFieldUpdateOperationsInput | number
+  lastFailedAttempt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lockUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   faceBiometric?: Prisma.FaceBiometricUncheckedUpdateOneWithoutUserNestedInput
   emergencyContact?: Prisma.EmContactUncheckedUpdateManyWithoutUserNestedInput
   document?: Prisma.DocumentUncheckedUpdateManyWithoutUserNestedInput
+  notificationProvisions?: Prisma.NotificationRecipientUncheckedUpdateManyWithoutUserNestedInput
+  notificationPermission?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -967,12 +1465,14 @@ export type UserCountOutputType = {
   refreshTokens: number
   emergencyContact: number
   document: number
+  notificationProvisions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   emergencyContact?: boolean | UserCountOutputTypeCountEmergencyContactArgs
   document?: boolean | UserCountOutputTypeCountDocumentArgs
+  notificationProvisions?: boolean | UserCountOutputTypeCountNotificationProvisionsArgs
 }
 
 /**
@@ -1006,6 +1506,13 @@ export type UserCountOutputTypeCountDocumentArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.DocumentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationProvisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationRecipientWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1014,10 +1521,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   mobile?: boolean
   profile?: boolean
+  role?: boolean
   language?: boolean
   status?: boolean
   mfaEnabled?: boolean
   preferredMethod?: boolean
+  failedLoginAttempts?: boolean
+  lastFailedAttempt?: boolean
+  lockUntil?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1025,6 +1536,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
   document?: boolean | Prisma.User$documentArgs<ExtArgs>
+  notificationProvisions?: boolean | Prisma.User$notificationProvisionsArgs<ExtArgs>
+  notificationPermission?: boolean | Prisma.User$notificationPermissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1035,10 +1548,14 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   mobile?: boolean
   profile?: boolean
+  role?: boolean
   language?: boolean
   status?: boolean
   mfaEnabled?: boolean
   preferredMethod?: boolean
+  failedLoginAttempts?: boolean
+  lastFailedAttempt?: boolean
+  lockUntil?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1051,10 +1568,14 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   mobile?: boolean
   profile?: boolean
+  role?: boolean
   language?: boolean
   status?: boolean
   mfaEnabled?: boolean
   preferredMethod?: boolean
+  failedLoginAttempts?: boolean
+  lastFailedAttempt?: boolean
+  lockUntil?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
@@ -1067,21 +1588,27 @@ export type UserSelectScalar = {
   password?: boolean
   mobile?: boolean
   profile?: boolean
+  role?: boolean
   language?: boolean
   status?: boolean
   mfaEnabled?: boolean
   preferredMethod?: boolean
+  failedLoginAttempts?: boolean
+  lastFailedAttempt?: boolean
+  lockUntil?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mobile" | "profile" | "language" | "status" | "mfaEnabled" | "preferredMethod" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "mobile" | "profile" | "role" | "language" | "status" | "mfaEnabled" | "preferredMethod" | "failedLoginAttempts" | "lastFailedAttempt" | "lockUntil" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   faceBiometric?: boolean | Prisma.User$faceBiometricArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   emergencyContact?: boolean | Prisma.User$emergencyContactArgs<ExtArgs>
   document?: boolean | Prisma.User$documentArgs<ExtArgs>
+  notificationProvisions?: boolean | Prisma.User$notificationProvisionsArgs<ExtArgs>
+  notificationPermission?: boolean | Prisma.User$notificationPermissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1094,6 +1621,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     emergencyContact: Prisma.$EmContactPayload<ExtArgs>[]
     document: Prisma.$DocumentPayload<ExtArgs>[]
+    notificationProvisions: Prisma.$NotificationRecipientPayload<ExtArgs>[]
+    notificationPermission: Prisma.$NotificationPreferencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1102,10 +1631,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string
     mobile: string | null
     profile: string | null
+    role: $Enums.UserRole
     language: $Enums.Language
     status: $Enums.UserStatus
     mfaEnabled: boolean
     preferredMethod: $Enums.AuthMethod
+    failedLoginAttempts: number
+    lastFailedAttempt: Date | null
+    lockUntil: Date | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -1507,6 +2040,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emergencyContact<T extends Prisma.User$emergencyContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emergencyContactArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   document<T extends Prisma.User$documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationProvisions<T extends Prisma.User$notificationProvisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationProvisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationRecipientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationPermission<T extends Prisma.User$notificationPermissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationPermissionArgs<ExtArgs>>): Prisma.Prisma__NotificationPreferenceClient<runtime.Types.Result.GetResult<Prisma.$NotificationPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1542,10 +2077,14 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly mobile: Prisma.FieldRef<"User", 'String'>
   readonly profile: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly language: Prisma.FieldRef<"User", 'Language'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly mfaEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly preferredMethod: Prisma.FieldRef<"User", 'AuthMethod'>
+  readonly failedLoginAttempts: Prisma.FieldRef<"User", 'Int'>
+  readonly lastFailedAttempt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lockUntil: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -2025,6 +2564,49 @@ export type User$documentArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
+}
+
+/**
+ * User.notificationProvisions
+ */
+export type User$notificationProvisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationRecipient
+   */
+  select?: Prisma.NotificationRecipientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationRecipient
+   */
+  omit?: Prisma.NotificationRecipientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationRecipientInclude<ExtArgs> | null
+  where?: Prisma.NotificationRecipientWhereInput
+  orderBy?: Prisma.NotificationRecipientOrderByWithRelationInput | Prisma.NotificationRecipientOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationRecipientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationRecipientScalarFieldEnum | Prisma.NotificationRecipientScalarFieldEnum[]
+}
+
+/**
+ * User.notificationPermission
+ */
+export type User$notificationPermissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationPreference
+   */
+  select?: Prisma.NotificationPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationPreference
+   */
+  omit?: Prisma.NotificationPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationPreferenceInclude<ExtArgs> | null
+  where?: Prisma.NotificationPreferenceWhereInput
 }
 
 /**

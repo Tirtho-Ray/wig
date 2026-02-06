@@ -10,13 +10,14 @@ export class CreateEmContactDto {
     @IsString()
     relationship: string;
 
+    @ApiProperty({ example: 'bro@gmail.com' })
+    @IsString()
+    email: string;
+
     @ApiProperty({ example: '+8801700000000' })
     @IsString()
     @IsOptional()
     phoneNumber: string;
-
-    @ApiProperty({ example: 'user-uuid-here' })
-    userId: string;
 }
 
 export class UpdateEmContactDto extends PartialType(CreateEmContactDto) {}

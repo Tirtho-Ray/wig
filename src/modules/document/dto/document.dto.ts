@@ -1,29 +1,23 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateDocumentDto {
-  @ApiProperty({ example: 'Aadhar Card' })
-  @IsString()
-  label: string;
+    @ApiProperty({ example: 'Passport' })
+    @IsString()
+    @IsNotEmpty()
+    label: string;
 
-  @ApiProperty({ example: '1234-5678-9012' })
-  @IsString()
-  value: string;
+    @ApiProperty({ example: 'P1234567' })
+    @IsString()
+    @IsNotEmpty()
+    value: string;
 
-  @ApiPropertyOptional({ example: 'IDENTITY' })
-  @IsOptional()
-  @IsString()
-  category?: string;
+    @ApiProperty({ example: 'Identity', required: false })
+    @IsOptional()
+    @IsString()
+    category?: string;
 
-  @ApiProperty({
-    example: ['https://image1.jpg', 'https://image2.jpg'],
-    type: [String],
-  })
-  @IsArray()
-  @IsOptional()
-  documentPhoto: string[];
-
-  @ApiProperty({ example: 'user_ulid_here' })
-  @IsString()
-  userId: string;
+    @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' }, required: false })
+    @IsOptional()
+    documentPhoto?: any;
 }

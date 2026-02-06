@@ -357,11 +357,6 @@ export type FaceBiometricUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FaceBiometricNullableScalarRelationFilter = {
-  is?: Prisma.FaceBiometricWhereInput | null
-  isNot?: Prisma.FaceBiometricWhereInput | null
-}
-
 export type FloatNullableListFilter<$PrismaModel = never> = {
   equals?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
   has?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
@@ -408,6 +403,32 @@ export type FaceBiometricSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
 }
 
+export type FaceBiometricNullableScalarRelationFilter = {
+  is?: Prisma.FaceBiometricWhereInput | null
+  isNot?: Prisma.FaceBiometricWhereInput | null
+}
+
+export type FaceBiometricCreatefaceDescriptorInput = {
+  set: number[]
+}
+
+export type FaceBiometricUpdatefaceDescriptorInput = {
+  set?: number[]
+  push?: number | number[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type FaceBiometricCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.FaceBiometricCreateWithoutUserInput, Prisma.FaceBiometricUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.FaceBiometricCreateOrConnectWithoutUserInput
@@ -438,23 +459,6 @@ export type FaceBiometricUncheckedUpdateOneWithoutUserNestedInput = {
   delete?: Prisma.FaceBiometricWhereInput | boolean
   connect?: Prisma.FaceBiometricWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FaceBiometricUpdateToOneWithWhereWithoutUserInput, Prisma.FaceBiometricUpdateWithoutUserInput>, Prisma.FaceBiometricUncheckedUpdateWithoutUserInput>
-}
-
-export type FaceBiometricCreatefaceDescriptorInput = {
-  set: number[]
-}
-
-export type FaceBiometricUpdatefaceDescriptorInput = {
-  set?: number[]
-  push?: number | number[]
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type FaceBiometricCreateWithoutUserInput = {
