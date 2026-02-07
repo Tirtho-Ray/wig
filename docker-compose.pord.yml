@@ -9,24 +9,40 @@ services:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=nest_db_prod
-    
     ports:
       - "5434:5432" 
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data
 
-  api:
+  app: # Renamed from 'api' to 'app'
     build:
       context: .
       dockerfile: Dockerfile 
     container_name: nest-api-app-prod
-    ports:
-      - "9001:9000" 
+    # The 'ports' section is removed. Nginx will handle external traffic.
     env_file:
       - .env.prod
     depends_on:
       - db
+    restart: always
     command: sh -c "npx prisma migrate deploy && pnpm run start:prod"
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nest-nginx-proxy-prod
+    restart: always
+    ports:
+      # Map host port 80 to Nginx container port 80 for HTTP traffic.
+      # For production, you would typically map port 443 for HTTPS.
+      - "80:80"
+      # - "443:443"
+    volumes:
+      # Mount the custom Nginx configuration.
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      # Add volumes for SSL certificates if you were to enable HTTPS.
+      # - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - app
 
 volumes:
   postgres_data_prod:
